@@ -1,11 +1,11 @@
 OS Thesis Project
 =================
-Tyler James Higley
+**Tyler James Higley**
 
 This is a repository for Tyler Higley's 2014/2015 Computer Science Senior Thesis Project. 
-
 ###Description
 The intention is to write a simple functional Operating System. 
+
 Languages: x86 Assembly, C, C++
 
 ###Sources:
