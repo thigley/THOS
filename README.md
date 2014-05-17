@@ -11,4 +11,4 @@ Languages: x86 Assembly, C, C++
 ###Sources:
 - OS Development Series - brokenthorn.com
 - Writing a Simple Operating System — from Scratch by Nick Blundell
-- Write Your Own Operating System Tutorial - joelgompert.com/
+- Write Your Own Operating System Tutorial - joelgompert.com
