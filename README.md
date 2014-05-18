@@ -3,10 +3,19 @@ OS Thesis Project
 **Tyler James Higley**
 
 This is a repository for Tyler Higley's 2014/2015 Computer Science Senior Thesis Project. 
-###Description
-The intention is to write a simple functional Operating System. 
+###Intention
+Write a simple functional Operating System that can:
+- Read and Write files
+- Navigate a filesystem
+- Run applications
 
-Languages: x86 Assembly, C, C++
+Intended Languages: x86 Assembly, C, C++
+Run on: QEMU [Quick EMUlator]
+###Versions
+1) HelloOS - Simple 16 bit Operating System that loads and prints a hello message
+
+2) Interactive - 16 bit Operating System that echos keyboard input to the screen
+
 
 ###Sources:
 - OS Development Series - brokenthorn.com
