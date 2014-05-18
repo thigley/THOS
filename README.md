@@ -10,6 +10,7 @@ Write a simple functional Operating System that can:
 - Run applications
 
 Intended Languages: x86 Assembly, C, C++
+
 Run on: QEMU [Quick EMUlator]
 ###Versions
 1) HelloOS - Simple 16 bit Operating System that loads and prints a hello message
