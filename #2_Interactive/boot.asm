@@ -1,6 +1,17 @@
 ;****************;
 ; Interactive OS ;
 ;****************;
+;****************************************
+;       Slightly Interactive OS
+;       - Created by Tyler Higley
+;
+; This version prints a string, waits
+; for input, prints another string, then
+; echos all further input. This file also
+; uses code from other files.
+;
+;****************************************
+
 
 org 0x7c00
 
@@ -13,66 +24,26 @@ start:
 	; PRINT FIRST STRING
 	mov ah, 0x0e
 	mov si, msg
-	call putstr
+	call println
 	
 	; WAIT FOR KEY THEN PRINT 
 	; SECOND STRING
 	xor ah, ah
 	int 0x16
 	mov si, msg2
-	call putstr
+	call println
 
 	; PRINT INPUT FOREVER
 repeat:
-	call printInput
+	call printin
 	jmp repeat
 
 
 ; PRINT STRING
-putstr:
-	lodsb
-	or al, al
-	jz putstrd
-	mov ah, 0x0e
-	mov bx, 0x0007
-	int 0x10
-	jmp putstr
-putstrd:
-	retn
+%include "methods/println.asm"
 
 ; PRINT INPUT
-printInput:
-	xor ah, ah
-	int 0x16
-	mov ah, 0x0e
-	int 0x10
-	mov bl, al
-	call checknewline
-	mov bl, al
-	call checkdelete
-	ret
-
-checknewline:
-	xor bl, 13
-	jz newline
-	ret
-	
-	newline:
-	mov al, 10
-	int 0x10
-	ret
-
-checkdelete:
-	xor bl, 8
-	jz delete
-	ret
-
-	delete:
-	mov al, 0x20
-	int 0x10
-	mov al, 8
-	int 0x10
-	ret
+%include "methods/printin.asm"
 
 ; DATA
 msg db 'Welcome to a typing OS!', 0x0A,0x0D, 0

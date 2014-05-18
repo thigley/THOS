@@ -1,8 +1,11 @@
 ;****************************************
-;	boot1.asm
+;	Hello World Operating System
 ;	- Basic Bootloader
 ;	- Created by Tyler Higley
 ;	- brokenthorn.com Tutorial
+;
+; This version simply loads and prints
+; a message.
 ;****************************************
 
 org	0x7c00				; The BIOS loads at location 0x7c00.
@@ -13,8 +16,6 @@ bits	16				; Must start in 16 bit mode
 Start:
 	mov bx, LoadMSG
 	call printString
-
-	jmp $
 
 	cli				; Clears interupts
 	hlt				; Halts the system
