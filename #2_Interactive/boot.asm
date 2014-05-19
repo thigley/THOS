@@ -21,6 +21,10 @@ start:
 	mov al, 0x03
 	int 0x10
 
+	; TEST PRINTHEX
+	mov dx, 0x1fb6
+	call printhex
+	
 	; PRINT FIRST STRING
 	mov ah, 0x0e
 	mov si, msg
@@ -39,15 +43,12 @@ repeat:
 	jmp repeat
 
 
-; PRINT STRING
-%include "methods/println.asm"
-
-; PRINT INPUT
-%include "methods/printin.asm"
+; PRINT Methods
+%include "methods/printMethods.asm"
 
 ; DATA
-msg db 'Welcome to a typing OS!', 0x0A,0x0D, 0
-msg2 db 'Type Away!', 0x0A, 0x0D, 0
+msg db 'Welcome to a typing OS!', 0
+msg2 db 'Type Away!', 0
 
 times 510 - ($-$$) db 0
 
