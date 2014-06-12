@@ -6,6 +6,7 @@
 ; - prints string at si
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 print:
+;	pusha
         lodsb
         or al, al
         jz returnPrint
@@ -14,6 +15,7 @@ print:
         int 0x10
         jmp print
 returnPrint:
+;	popa
         retn
 
 ; println 
@@ -21,12 +23,15 @@ returnPrint:
 ;   with newline
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 println:
+;	pusha
 	call print
+
 	mov al, 0x0A
 	int 0x10
 	mov al, 0x0D
 	int 0x10
 	
+;	popa
 	ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -36,6 +41,7 @@ println:
 HEX_OUT: db '0x0000', 0
 
 printhex:
+;	pusha
 	mov bx, HEX_OUT
 	add bx, 5
 
@@ -60,6 +66,7 @@ printhex:
 
         mov si, HEX_OUT
         call println
+;	popa
 	ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -67,6 +74,7 @@ printhex:
 ; -prints the next input
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 printin:
+;	pusha
         xor ah, ah
         int 0x16
         mov ah, 0x0e
@@ -75,10 +83,11 @@ printin:
         call checknewline
         mov bl, al
         call checkdelete
-        ret
+ ;       popa
+	ret
 
 checknewline:           ; add newline if carriage return
-        xor bl, 13
+	xor bl, 13
         jz newline
         ret
 

@@ -1,8 +1,8 @@
 ;****************;
-; Interactive OS ;
+; BOOTSTRAPIN OS ;
 ;****************;
 ;****************************************
-;       Slightly Interactive OS
+;       Basic Bootstrap OS
 ;       - Created by Tyler Higley
 ;
 ; This version prints a string, waits
@@ -16,40 +16,36 @@
 org 0x7c00
 
 start:
-	; CLEAR SCREEN
-	xor ah, ah
-	mov al, 0x03
-	int 0x10
+	mov ax, 1000h
+	mov es, ax
+	mov bx, 0
 
-	; TEST PRINTHEX
-	mov dx, 0x1fb6
-	call printhex
-	
-	; PRINT FIRST STRING
-	mov ah, 0x0e
+	mov ah, 2
+	mov al, 5
+	mov ch, 0
+	mov cl, 2
+	mov dh, 0
+	mov dl, 0
+	int 13h
 	mov si, msg
 	call println
-	
-	; WAIT FOR KEY THEN PRINT 
-	; SECOND STRING
-	xor ah, ah
-	int 0x16
-	mov si, msg2
-	call println
+	jmp 1000h:0000
 
-	; PRINT INPUT FOREVER
-repeat:
-	call printin
-	jmp repeat
+;INCLUDE FILES
+%include 'methods/printMethods.asm'
 
-
-; PRINT Methods
-%include "methods/printMethods.asm"
-
-; DATA
-msg db 'Welcome to a typing OS!', 0
-msg2 db 'Type Away!', 0
+;DATA
+msg	db 'Hello'
+msg2	db 'World'
+msg3	db '!'
 
 times 510 - ($-$$) db 0
+dw 0AA55h
 
-db 0x55, 0xAA
+mov si, msg2
+call println
+
+mov si, msg3
+call println
+
+jmp $
