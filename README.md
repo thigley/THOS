@@ -24,3 +24,5 @@ Run on: QEMU [Quick EMUlator]
 - OS Development Series - brokenthorn.com
 - Writing a Simple Operating System — from Scratch by Nick Blundell
 - Write Your Own Operating System Tutorial - joelgompert.com
+- Writing a 16-bit Real mode OS [NASM] - appusajeev.wordpress.com
+- Onyxkernel -- First Steps -
