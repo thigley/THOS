@@ -1,4 +1,5 @@
 #!/bin/bash
 
-nasm boot.asm -f bin -o boot.bin
-qemu-system-x86_64 boot.bin
+nasm -f bin -o boot.bin boot.asm
+dd status=noxfer conv=notrunc if=boot.bin of=boot.flp
+qemu-system-x86_64 -fda boot.flp
