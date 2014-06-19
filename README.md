@@ -17,6 +17,8 @@ Run on: QEMU [Quick EMUlator]
 
 2) Interactive - 16 bit Operating System that echos keyboard input to the screen
 
+3) Bootstrapping - OS that bootstraps from a floppy. *In progress...*
+
 
 ###Sources:
 - OS Development Series - brokenthorn.com
