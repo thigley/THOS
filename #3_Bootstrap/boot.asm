@@ -5,47 +5,55 @@
 ;       Basic Bootstrap OS
 ;       - Created by Tyler Higley
 ;
-; This version prints a string, waits
-; for input, prints another string, then
-; echos all further input. This file also
-; uses code from other files.
+; Under construction...
 ;
 ;****************************************
 
 
 org 0x7c00
+[bits 16]
 
-start:
-	mov ax, 1000h
-	mov es, ax
-	mov bx, 0
+mov bp, 0x9000
+mov sp, bp
 
-	mov ah, 2
-	mov al, 5
-	mov ch, 0
-	mov cl, 2
-	mov dh, 0
-	mov dl, 0
-	int 13h
-	mov si, msg
-	call println
-	jmp 1000h:0000
+mov si, MSG_REAL
+call println
+
+call switch_to_pm
+
+jmp $
+
+;start:
+;	mov ax, 1000h
+;	mov es, ax
+;	mov bx, 0
+;
+;	mov ah, 2
+;	mov al, 5
+;	mov ch, 0
+;	mov cl, 2
+;	mov dh, 0
+;	mov dl, 0
+;	int 13h
+;	mov si, msg
+;	call println
+;	jmp 1000h:0000
 
 ;INCLUDE FILES
 %include 'methods/printMethods.asm'
+%include 'gdt.asm'
+%include 'methods/pmPrint.asm'
+%include 'switch.asm'
+
+[bits 32]
+BEGIN_PM:
+	mov ebx, MSG_PROT
+	call print_string_pm
+	jmp $
 
 ;DATA
-msg	db 'Hello'
-msg2	db 'World'
-msg3	db '!'
+MSG_REAL	db "Started in 16-bit Real Mode", 0
+MSG_PROT	db "Successfully landed in 32-bit Protected Mode", 0
 
 times 510 - ($-$$) db 0
 dw 0AA55h
-
-mov si, msg2
-call println
-
-mov si, msg3
-call println
-
-jmp $
