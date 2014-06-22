@@ -10,8 +10,7 @@
 ;****************************************
 
 
-org 0x7c00
-[bits 16]
+[org 0x7c00]
 
 mov bp, 0x9000
 mov sp, bp
@@ -56,4 +55,4 @@ MSG_REAL	db "Started in 16-bit Real Mode", 0
 MSG_PROT	db "Successfully landed in 32-bit Protected Mode", 0
 
 times 510 - ($-$$) db 0
-dw 0AA55h
+dw 0xAA55
