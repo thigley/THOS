@@ -15,6 +15,8 @@
 mov bp, 0x9000
 mov sp, bp
 
+call clearscreen
+
 mov si, MSG_REAL
 call println
 
