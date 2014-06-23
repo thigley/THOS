@@ -1,5 +1,7 @@
 #!/bin/bash
 
 nasm -f bin -o boot.bin boot.asm
-dd status=noxfer conv=notrunc if=boot.bin of=boot.flp
-qemu-system-x86_64 -fda boot.flp
+C/compile C/kernel
+cat boot.bin C/kernel.bin > os-image
+dd status=noxfer conv=notrunc if=os-image of=os.flp
+qemu-system-x86_64 -fda os.flp

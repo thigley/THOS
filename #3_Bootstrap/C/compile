@@ -1,0 +1,4 @@
+#!/bin/bash
+gcc -ffreestanding -c $1.c -o $1.o
+ld -o $1.bin -Ttext 0x1000 $1.o --oformat binary
+ndisasm -b 32 $1.bin > $1.dis

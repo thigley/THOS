@@ -1,4 +1,6 @@
 ; GDT
+; voodoo courtesy of Nick Blundell
+
 gdt_start:
 
 gdt_null:
