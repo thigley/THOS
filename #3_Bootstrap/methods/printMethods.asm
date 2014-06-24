@@ -70,6 +70,14 @@ printhex:
 	ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; printint
+; - print int at dx
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; not yet implemented
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ; printin
 ; -prints the next input
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -17,5 +17,21 @@ disk_load:
 	mov cl, 0x02	; Start reading from second sector (i.e.
 			; after the boot sector)
 	int 0x13	; BIOS interrupt
+	
+	jc disk_error
+
 	pop dx		; Restore DX from the stack
+	cmp dh, al
+	jne disk_error
+
+	mov si, DISK_SUCCESS_MSG
+	call println
 	ret
+
+disk_error:
+	mov si, DISK_ERROR_MSG
+	call println
+	jmp $
+
+DISK_ERROR_MSG db "Disk read error!", 0
+DISK_SUCCESS_MSG db "Successful disk load!", 0

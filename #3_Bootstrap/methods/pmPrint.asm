@@ -7,7 +7,7 @@ WHITE_ON_BLACK equ 0x0f
 print_string_pm:
 	pusha
 	mov edx, VIDEO_MEMORY
-	add edx, 160
+	add edx, 1280
 
 print_string_pm_loop:
 	mov al, [ebx]
