@@ -3,11 +3,17 @@
 VIDEO_MEMORY equ 0xb8000
 WHITE_ON_BLACK equ 0x0f
 
-;prints a null-terminated string at EDX
+;prints a null-terminated string at EBX
+;skipping ax lines
 print_string_pm:
 	pusha
 	mov edx, VIDEO_MEMORY
-	add edx, 1280
+addline:
+	cmp ax, 0
+	je print_string_pm_loop
+	add edx, 160
+	sub ax, 1
+	jmp addline
 
 print_string_pm_loop:
 	mov al, [ebx]

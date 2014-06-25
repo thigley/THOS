@@ -56,9 +56,10 @@ load_kernel:
 BEGIN_PM:
 
 	mov ebx, MSG_PROT
+	mov ax, 3
 	call print_string_pm
 
-	call KERNEL_OFFSET
+;	call KERNEL_OFFSET
 	jmp $
 
 ;DATA
@@ -68,3 +69,4 @@ MSG_PROT	db "Successfully landed in 32-bit Protected Mode", 0
 MSG_KERN	db "Loading kernel into memory...", 0
 times 510 - ($-$$) db 0
 dw 0xAA55
+%include "ak.asm"
