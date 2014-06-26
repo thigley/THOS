@@ -1,7 +1,8 @@
 #!/bin/bash
 
-nasm -f bin -o boot.bin boot.asm
+nasm -f bin boot.asm -o load
+dd if=load of=os-image
+nasm -f bin kernel.asm -o kernel
 #C/compile C/kernel
-#cat boot.bin C/kernel.bin > os-image.bin
-dd status=noxfer conv=notrunc if=boot.bin of=os.flp
-qemu-system-x86_64 -fda os.flp
+dd seek=1 conv=sync if=kernel of=os-image
+qemu-system-x86_64 -fda os-image

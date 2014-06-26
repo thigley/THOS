@@ -1,6 +1,0 @@
-#!/bin/bash
-
-nasm -f bin -o disk_test.bin disk_test.asm
-dd status=noxfer conv=notrunc if=disk_test.bin of=test.flp
-qemu-system-x86_64 -fda test.flp
-

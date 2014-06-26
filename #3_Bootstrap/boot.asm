@@ -1,72 +1,67 @@
-;****************;
-; BOOTSTRAPIN OS ;
-;****************;
-;****************************************
-;       Basic Bootstrap OS
-;       - Created by Tyler Higley
-;	
-;	Switches from 16 bit to 32 bit mode
-; Under construction...
-;
-;****************************************
-
-
 [org 0x7c00]
-KERNEL_OFFSET equ 0x1000	;memoy offset of kernel
+;[org 0]
+;	jmp 07c0h:start
 
-mov [BOOT_DRIVE], dl		;store boot drive for later
+start:
+	call clearscreen
 
-mov bp, 0x9000 ;set the stack
-mov sp, bp
+	mov si, MSG_REAL
+	call println
 
-;clear screen
-call clearscreen
+	call load_kernel
+	call switch_to_pm
+	
+        jmp $
 
-;print message in real mode
-mov si, MSG_REAL
-call println
+load_kernel:
+reset:
+        mov ax,0
+        mov dl, 0
+        int 13h
+        jc reset
 
-call load_kernel
+floppy:
+        mov ax, 1000h
+        mov es, ax
+        mov bx, 0
 
-;switch to protected mode
-call switch_to_pm
+        mov ah, 2
+        mov al, 1
+        mov ch, 0
+        mov cl, 2
+        mov dh, 0
+        mov dl, 0
+        int 13h
 
-jmp $
+        jc floppy
+	
+	mov si, MSG_LOAD
+	call println
+;	jmp 1000h:0000
+ret
+
 
 ;INCLUDE FILES
 %include 'methods/printMethods.asm'
-%include 'methods/disk_load.asm'
+;%include 'methods/disk_load.asm'
 %include 'gdt.asm'
 %include 'methods/pmPrint.asm'
 %include 'switch.asm'
 
-[bits 16]
-load_kernel:
-	mov si, MSG_KERN
-	call println
-
-	mov bx, KERNEL_OFFSET
-	mov dh, 15
-	mov dl, [BOOT_DRIVE]
-	call disk_load
-	
-	ret
+MSG_REAL	db "Started in 16-bit Real Mode", 0
+MSG_LOAD	db "Loading Kernel to memory", 0
+MSG_PROT	db "Successfully landed in 32-bit Protected Mode", 0
 
 [bits 32]
 BEGIN_PM:
 
 	mov ebx, MSG_PROT
-	mov ax, 3
+	mov ax, 2
 	call print_string_pm
+	
+	jmp 1000h:0000
+	jmp $	
 
-;	call KERNEL_OFFSET
-	jmp $
+times 510-($-$$) db 0
+dw 0xaa55
 
-;DATA
-BOOT_DRIVE	db 0
-MSG_REAL	db "Started in 16-bit Real Mode", 0
-MSG_PROT	db "Successfully landed in 32-bit Protected Mode", 0
-MSG_KERN	db "Loading kernel into memory...", 0
-times 510 - ($-$$) db 0
-dw 0xAA55
-%include "ak.asm"
