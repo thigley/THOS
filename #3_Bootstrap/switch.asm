@@ -2,6 +2,8 @@
 ; switch to protected mode
 switch_to_pm:
 	cli
+	xor ax, ax
+	mov ds, ax
 	lgdt [gdt_descriptor]
 
 	mov eax, cr0

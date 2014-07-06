@@ -7,3 +7,4 @@ kernel:
 	jmp $
 
 HELLOK db "Hello from the asm Kernel!", 0
+%include 'methods/pmPrint.asm'

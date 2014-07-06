@@ -38,44 +38,36 @@ println:
 ; printhex
 ; - prints hex at dx
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-HEX_OUT: db '0x0000', 0
-
-printhex:
+;HEX_OUT: db '0x0000', 0
+;
+;printhex:
 ;	pusha
-	mov bx, HEX_OUT
-	add bx, 5
+;	mov bx, HEX_OUT
+;	add bx, 5
 
-	nexthex:
-	mov cx, dx
-	and cx, 0x000f
+;	nexthex:
+;	mov cx, dx
+;	and cx, 0x000f
 	
-	cmp cx, 0x000A
-	jl normalhex
+;	cmp cx, 0x000A
+;	jl normalhex
 
-	mov [bx], byte 'A'
-	sub cx, 10
+;	mov [bx], byte 'A'
+;	sub cx, 10
 	
 	
-	normalhex:
-	add [bx], cx
+;	normalhex:
+;	add [bx], cx
 
-	dec bx
-	shr dx, 4
-	cmp [bx], byte 'x'
-	jne nexthex
+;	dec bx
+;	shr dx, 4
+;	cmp [bx], byte 'x'
+;	jne nexthex
 
-        mov si, HEX_OUT
-        call println
+  ;      mov si, HEX_OUT
+ ;       call println
 ;	popa
-	ret
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; printint
-; - print int at dx
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; not yet implemented
-
-
+;	ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; printin
@@ -116,16 +108,3 @@ checkdelete:            ; replace with space if backspace
         int 0x10
         ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; clearscreen
-; -clears the screen
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-clearscreen:
-	pusha
-	xor ah, ah
-        mov al, 0x03
-        int 0x10
-	popa
-	ret
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-

@@ -1,7 +1,11 @@
 #!/bin/bash
 
 nasm -f bin -o boot.bin boot.asm
-#C/compile C/kernel
-#cat boot.bin C/kernel.bin > os-image.bin
-dd status=noxfer conv=notrunc if=boot.bin of=os.flp
+C/compile C/kernel
+cat boot.bin C/kernel.bin > os-image.bin
+#nasm -f bin -o kernel.bin ak.asm
+cat boot.bin kernel.bin > os-image.bin
+dd status=noxfer conv=notrunc if=os-image.bin of=os.flp
+#dd if=boot.bin of=os.flp bs=512 count=1
+#dd if=C/kernel.bin of=os.flp bs=512 seek=1
 qemu-system-x86_64 -fda os.flp

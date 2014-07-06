@@ -10,8 +10,9 @@
 ;
 ;****************************************
 
-
 [org 0x7c00]
+jmp 0x0000:start
+start:
 KERNEL_OFFSET equ 0x1000	;memoy offset of kernel
 
 mov [BOOT_DRIVE], dl		;store boot drive for later
@@ -35,6 +36,7 @@ jmp $
 
 ;INCLUDE FILES
 %include 'methods/printMethods.asm'
+%include 'methods/clearscreen.asm'
 %include 'methods/disk_load.asm'
 %include 'gdt.asm'
 %include 'methods/pmPrint.asm'
@@ -45,6 +47,11 @@ load_kernel:
 	mov si, MSG_KERN
 	call println
 
+	;mov ah, 0
+	;int 13h
+
+	;mov ax,0
+	;mov es, ax
 	mov bx, KERNEL_OFFSET
 	mov dh, 15
 	mov dl, [BOOT_DRIVE]
@@ -59,7 +66,8 @@ BEGIN_PM:
 	mov ax, 3
 	call print_string_pm
 
-;	call KERNEL_OFFSET
+;	jmp CODE_SEG:0x1000
+	jmp KERNEL_OFFSET
 	jmp $
 
 ;DATA
@@ -69,4 +77,3 @@ MSG_PROT	db "Successfully landed in 32-bit Protected Mode", 0
 MSG_KERN	db "Loading kernel into memory...", 0
 times 510 - ($-$$) db 0
 dw 0xAA55
-%include "ak.asm"
