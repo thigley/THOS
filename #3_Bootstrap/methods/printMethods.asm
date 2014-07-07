@@ -38,36 +38,36 @@ println:
 ; printhex
 ; - prints hex at dx
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;HEX_OUT: db '0x0000', 0
-;
-;printhex:
-;	pusha
-;	mov bx, HEX_OUT
-;	add bx, 5
+HEX_OUT: db '0x0000', 0
 
-;	nexthex:
-;	mov cx, dx
-;	and cx, 0x000f
+printhex:
+	pusha
+	mov bx, HEX_OUT
+	add bx, 5
+
+	nexthex:
+	mov cx, dx
+	and cx, 0x000f
 	
-;	cmp cx, 0x000A
-;	jl normalhex
+	cmp cx, 0x000A
+	jl normalhex
 
-;	mov [bx], byte 'A'
-;	sub cx, 10
+	mov [bx], byte 'A'
+	sub cx, 10
 	
 	
-;	normalhex:
-;	add [bx], cx
+	normalhex:
+	add [bx], cx
 
-;	dec bx
-;	shr dx, 4
-;	cmp [bx], byte 'x'
-;	jne nexthex
+	dec bx
+	shr dx, 4
+	cmp [bx], byte 'x'
+	jne nexthex
 
-  ;      mov si, HEX_OUT
- ;       call println
-;	popa
-;	ret
+        mov si, HEX_OUT
+        call println
+	popa
+	ret
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; printin

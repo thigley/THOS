@@ -1,6 +1,5 @@
-[org 0]
-;[bits 32]
-jmp main
+[org 0x1000]
+jmp 0x0000:main
 
 msg db 'Hello World', 0
 %include "methods/printMethods.asm"
