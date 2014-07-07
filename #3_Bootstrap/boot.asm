@@ -21,7 +21,6 @@ mov [BOOT_DRIVE], dl		;store boot drive for later
 	call println
 
 	call load_kernel
-;	call switch_to_pm
 	
         jmp $
 
@@ -30,20 +29,12 @@ mov [BOOT_DRIVE], dl		;store boot drive for later
 %include 'methods/printMethods.asm'
 %include 'methods/clearscreen.asm'
 %include 'methods/disk_load.asm'
-;%include 'gdt.asm'
-;%include 'methods/pmPrint.asm'
-;%include 'switch.asm'
 
 [bits 16]
 load_kernel:
 	mov si, MSG_KERN
-	call println
+	call print
 
-	;mov ah, 0
-	;int 13h
-
-	;mov ax,0
-	;mov es, ax
 	mov bx, KERNEL_OFFSET
 	mov dh, 5
 	mov dl, [BOOT_DRIVE]
@@ -52,18 +43,6 @@ load_kernel:
 	jmp KERNEL_OFFSET
 
 	ret
-
-
-;[bits 32]
-;BEGIN_PM:
-
-;	mov ebx, MSG_PROT
-;	mov ax, 5
-;	call print_string_pm
-	
-;	jmp CODE_SEG:0x1000
-;	jmp KERNEL_OFFSET
-;	jmp $
 
 ;DATA
 BOOT_DRIVE	db 0
