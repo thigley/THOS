@@ -1,8 +1,0 @@
-#!/bin/bash
-
-nasm -f bin boot.asm -o progboot
-dd if=progboot of=fd0
-nasm -f bin kernel.asm -o kernel
-dd seek=1 conv=sync if=kernel of=fd0
-qemu-system-x86_64 -fda fd0
-

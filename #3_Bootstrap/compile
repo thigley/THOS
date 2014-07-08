@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Renove old
+rm bin/*
+rm object/*
+
+# ASM to BIN
+nasm -f bin -o bin/boot.bin src/boot.asm
+nasm -f bin -o bin/loader.bin src/loader.asm
+
+# C to BIN
+gcc -ffreestanding -c src/kernel.c -o object/kernel.o
+ld -o bin/kernel.bin -Ttext 0x1000 object/kernel.o --oformat binary
+
+# Combine
+cat bin/boot.bin bin/loader.bin > bin/os-image.bin
+
+# Make Floppy
+dd status=noxfer conv=notrunc if=bin/os-image.bin of=os.flp

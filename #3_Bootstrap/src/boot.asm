@@ -26,9 +26,9 @@ mov [BOOT_DRIVE], dl		;store boot drive for later
 
 
 ;INCLUDE FILES
-%include 'methods/printMethods.asm'
-%include 'methods/clearscreen.asm'
-%include 'methods/disk_load.asm'
+%include 'src/methods/printMethods.asm'
+%include 'src/methods/clearscreen.asm'
+%include 'src/methods/disk_load.asm'
 
 [bits 16]
 load_kernel:

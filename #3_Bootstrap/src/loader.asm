@@ -9,10 +9,10 @@ main:
 loops:
 	jmp loops
 
-%include 'methods/printMethods.asm'
-%include 'gdt.asm'
-%include 'methods/pmPrint.asm'
-%include 'methods/switch.asm'
+%include 'src/methods/printMethods.asm'
+%include 'src/gdt.asm'
+%include 'src/methods/pmPrint.asm'
+%include 'src/methods/switch.asm'
 
 MSG_JUMP	db "Successfully jumped to kernel", 0
 MSG_PROT        db "Successfully landed in 32-bit Protected Mode", 0
