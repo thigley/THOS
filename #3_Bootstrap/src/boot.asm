@@ -13,16 +13,16 @@
 [org 0x7c00]
 jmp 0x0000:start
 start:
-KERNEL_OFFSET equ 0x1000	;memoy offset of kernel
-mov [BOOT_DRIVE], dl		;store boot drive for later
+	mov [BOOT_DRIVE], dl		;store boot drive for later
+	
 	call clearscreen
 
 	mov si, MSG_REAL
 	call println
 
-	call load_kernel
+	call load_jumps
 	
-        jmp $
+        jmp $				;we never get here
 
 
 ;INCLUDE FILES
@@ -31,16 +31,20 @@ mov [BOOT_DRIVE], dl		;store boot drive for later
 %include 'src/methods/disk_load.asm'
 
 [bits 16]
-load_kernel:
+load_jumps:
 	mov si, MSG_KERN
 	call print
 
-	mov bx, KERNEL_OFFSET
-	mov dh, 5
+	mov bx, 0x0500
+	mov dh, 1
 	mov dl, [BOOT_DRIVE]
 	call disk_load
 
-	jmp KERNEL_OFFSET
+	mov bx, 0x1000
+	mov dh, 5
+	mov dl, [BOOT_DRIVE+512]
+
+	jmp 0x0500
 
 	ret
 

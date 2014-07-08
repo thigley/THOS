@@ -1,7 +1,8 @@
-[org 0x1000]
-jmp 0x0000:main
+[org 0x0500]
+jmp 0x0000:land
+extern main
 
-main:
+land:
 	mov si, MSG_JUMP
 	call println
 	
@@ -14,7 +15,7 @@ loops:
 %include 'src/methods/pmPrint.asm'
 %include 'src/methods/switch.asm'
 
-MSG_JUMP	db "Successfully jumped to kernel", 0
+MSG_JUMP	db "Successfully jumped to memory", 0
 MSG_PROT        db "Successfully landed in 32-bit Protected Mode", 0
 
 [bits 32]
@@ -23,5 +24,10 @@ BEGIN_PM:
       	mov ebx, MSG_PROT
        	mov ax, 3
        	call print_string_pm
+	
+;	jmp 0x00:j2k
+;j2k:
+;	jmp 0x07c0:0x1000
 	jmp $
 
+times 512 - ($-$$) db 0

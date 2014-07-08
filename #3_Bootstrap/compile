@@ -13,7 +13,7 @@ gcc -ffreestanding -c src/kernel.c -o object/kernel.o
 ld -o bin/kernel.bin -Ttext 0x1000 object/kernel.o --oformat binary
 
 # Combine
-cat bin/boot.bin bin/loader.bin > bin/os-image.bin
+cat bin/boot.bin bin/loader.bin bin/kernel.bin > bin/os-image.bin
 
 # Make Floppy
 dd status=noxfer conv=notrunc if=bin/os-image.bin of=os.flp
