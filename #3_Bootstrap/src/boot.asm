@@ -5,8 +5,9 @@
 ;       Basic Bootstrap OS
 ;       - Created by Tyler Higley
 ;	
+;	Jumps to memory
 ;	Switches from 16 bit to 32 bit mode
-; Under construction...
+; 	Switches to C Kernel
 ;
 ;****************************************
 
