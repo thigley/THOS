@@ -36,13 +36,13 @@ load_jumps:
 	call print
 
 	mov bx, 0x0500
-	mov dh, 1
+	mov dh, 5
 	mov dl, [BOOT_DRIVE]
 	call disk_load
 
-	mov bx, 0x1000
-	mov dh, 5
-	mov dl, [BOOT_DRIVE+512]
+;	mov bx, 0x1000
+;	mov dh, 5
+;	mov dl, [BOOT_DRIVE+512]
 
 	jmp 0x0500
 

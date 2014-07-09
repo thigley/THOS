@@ -23,3 +23,7 @@ BEGIN_PM:
       	mov ebx, MSG_PROT
        	mov ax, 3
        	call print_string_pm
+
+	jmp kernelStart
+times 512 - ($-$$) db 0
+kernelStart:

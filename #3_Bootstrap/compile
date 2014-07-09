@@ -15,7 +15,7 @@ nasm src/entry.asm -f elf32 -o object/entry.o
 # C to BIN
 echo 'Compiling C...'
 gcc -ffreestanding -c -m32 src/kernel.c -o object/kernel.o
-ld -melf_i386 -o bin/kernel.bin -Ttext 0x1000 object/entry.o object/kernel.o --oformat binary
+ld -melf_i386 -o bin/kernel.bin -Ttext 0x0700 object/entry.o object/kernel.o --oformat binary
 
 # Combine
 echo 'Combining all...'

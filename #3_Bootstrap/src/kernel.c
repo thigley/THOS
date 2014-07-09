@@ -10,7 +10,7 @@ void main() {
 		*video_memory++;
 	}
 	for(i = 0; i < 30; i++){
-		*video_memory++ = kernel_string;
+		*video_memory++ = *kernel_string;
 		*kernel_string++;
 		*video_memory++ = 0xA;
 	}
