@@ -1,8 +1,7 @@
 [org 0x0500]
-jmp 0x0000:land
-extern main
+jmp 0x0000:load
 
-land:
+load:
 	mov si, MSG_JUMP
 	call println
 	
@@ -24,10 +23,3 @@ BEGIN_PM:
       	mov ebx, MSG_PROT
        	mov ax, 3
        	call print_string_pm
-	
-;	jmp 0x00:j2k
-;j2k:
-;	jmp 0x07c0:0x1000
-	jmp $
-
-times 512 - ($-$$) db 0
