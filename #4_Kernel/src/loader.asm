@@ -2,6 +2,7 @@
 jmp 0x0000:load
 
 load:
+	call hide_cursor
 	call switch_to_pm
 	jmp $
 
@@ -9,6 +10,7 @@ load:
 %include 'src/asm_files/gdt.asm'
 %include 'src/asm_files/pmPrint.asm'
 %include 'src/asm_files/switch.asm'
+%include 'src/asm_files/hide_cursor.asm'
 
 MSG_PROT        db "32-bit Protected Mode", 0
 

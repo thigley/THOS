@@ -1,6 +1,7 @@
 // video 
 #define W 80
 #define H 25
+#define VIDEO_ADDRESS 0xb8000
 
 // colors
 #define BLACK 0
@@ -10,7 +11,7 @@
 #define RED 4
 #define MAGENTA 5
 #define BROWN 6
-#define LIGHGRAY 7
+#define LIGHTGRAY 7
 #define DARKGRAY 8
 #define LIGHTBLUE 9
 #define LIGHTGREEN 10
@@ -22,7 +23,10 @@
 
 void setup();
 void clear();
+void printchar(char);
 void print(char*);
 void println(char*);
 
-char* video_memory;
+int CURRENTCOLOR;
+int OFFSET;
+char* vidmem;
