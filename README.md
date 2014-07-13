@@ -2,7 +2,7 @@ OS Thesis Project
 =================
 **Tyler James Higley**
 
-This is a repository for Tyler Higley's 2014/2015 Computer Science Senior Thesis Project. 
+This is a repository for Tyler Higley's Potential 2014/2015 Computer Science Senior Thesis Project. 
 ###Intention
 Write a simple functional Operating System that can:
 - Read and Write files
@@ -17,7 +17,9 @@ Run on: QEMU [Quick EMUlator]
 
 2) Interactive - 16 bit Operating System that echos keyboard input to the screen
 
-3) Bootstrapping - OS that bootstraps from a floppy. *In progress...*
+3) Bootstrapping - OS that bootstraps from a floppy to memory and jumps to the C Kernel
+
+4) Kernel - Add functionality to the Kernel
 
 
 ###Sources:
