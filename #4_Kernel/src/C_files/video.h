@@ -26,6 +26,7 @@ void clear();
 void printchar(char);
 void print(char*);
 void println(char*);
+void printint(int);
 
 int CURRENTCOLOR;
 int OFFSET;

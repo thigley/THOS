@@ -32,4 +32,34 @@ void println(char* str){
 		printchar(' ');
 	}
 }
-
+void printint(int input){
+	char* output = "00000";
+	output+=4;
+	int i;
+	for(i = 1; i < 5; i++){
+		*output = '0'+ input%10;
+		input/=10;
+		output--;
+	}
+	while(*output=='0'&&i-->1){
+		output++;
+	}
+	print(output);
+}
+void printhex(int input){
+	char* output = "0x0000";
+	output+=5;
+	int i;
+        for(i = 1; i < 4; i++){
+                *output = '0'+ input%16;
+		if(*output>'9'){
+			*output-='0';
+			*output%=10;
+			*output+='A';
+		}
+                input/=16;
+                output--;
+        }
+        output-=2;
+        print(output);
+}
