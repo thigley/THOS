@@ -2,44 +2,46 @@ void loadHello();
 void loadMenu();
 
 void loadHello(){
-        char* indent = "                             ";
-        CURRENTCOLOR = GREEN;
-        print(indent);
+	OFFSET+=W*2;
+        OFFSET+=29*2;
+	CURRENTCOLOR = YELLOW;
         println("***********************");
-        print(indent);
+        OFFSET+=29*2;
         println("***                 ***");
-        print(indent);
+        OFFSET+=29*2;
         print("**  ");
-        CURRENTCOLOR = WHITE;
+        CURRENTCOLOR = BLACK;
         print("Welcome to ");
-        CURRENTCOLOR = YELLOW;
+        CURRENTCOLOR = RED;
         print("THOS");
-        CURRENTCOLOR = GREEN;
+        CURRENTCOLOR = YELLOW;
         println("  **");
-        print(indent);
+        OFFSET+=29*2;
         print("*     ");
-        CURRENTCOLOR = WHITE;
+        CURRENTCOLOR = BLACK;
         print("Created by:");
-        CURRENTCOLOR = GREEN;
+        CURRENTCOLOR = YELLOW;
         println("     *");
-        print(indent);
+        OFFSET+=29*2;
         print("**   ");
-        CURRENTCOLOR = LIGHTMAGENTA;
+        CURRENTCOLOR = RED;
         print("Tyler Higley!");
-        CURRENTCOLOR = GREEN;
+        CURRENTCOLOR = YELLOW;
         println("   **");
-        print(indent);
+        OFFSET+=29*2;
         println("***                 ***");
-        print(indent);
+        OFFSET+=29*2;
         println("***********************");
-        CURRENTCOLOR = WHITE;
+        CURRENTCOLOR = BLACK;
 }
 
 void loadMenu(){
-	println("");
-	print("                 ");
+	OFFSET+=W*2;
+	OFFSET+=17*2;
 	println("**********************************************");
-	print("                 * ");
+	OFFSET+=17*2;
+	print("* ");
+	CURRENTCOLOR = RED;
 	print("Applications");
 	print("    ");
 	print("Files");
@@ -47,8 +49,9 @@ void loadMenu(){
 	print("About");
 	print("    ");
 	print("Other");
+	CURRENTCOLOR = BLACK;
 	println("    *");
-	print("                 ");
+	OFFSET+=17*2;
 	println("**********************************************");
-	println("");
+	OFFSET+=W*2;
 }

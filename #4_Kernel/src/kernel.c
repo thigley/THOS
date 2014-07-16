@@ -3,13 +3,17 @@
 #include "C_files/keyboard.c"
 
 void main() {
+	CURRENTBACK = BACKLIGHTBLUE;
 	setup();
+//	setupscancodes();
 	loadHello();
 	loadMenu();
 		
 	while(1){
 		if(inportb(0x60)!=250&&!(inportb(0x60)&0x80)){
 			printchar(getchar());
+//			CURRENTBACK+=0x10;
+//			setup();
 		}
 	}
 	for(;;);

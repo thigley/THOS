@@ -9,14 +9,15 @@ void setup(){
 }
 void clear(){
 	int i;
-	for(i = 0; i<W*H*2; i++){
+	for(i = 0; i<W*H; i++){
 		vidmem[OFFSET++] = ' ';
-		vidmem[OFFSET++] = CURRENTCOLOR;
+		vidmem[OFFSET++] = CURRENTBACK + CURRENTCOLOR;
 	}
 }
 void printchar(char x){
 	vidmem[OFFSET++] = x;
-	vidmem[OFFSET++] = CURRENTCOLOR;
+	int background = vidmem[OFFSET]&0xF0;
+	vidmem[OFFSET++] = background + CURRENTCOLOR;
 }
 void print(char* str){
         while(*str!='\0'){
@@ -29,7 +30,7 @@ void println(char* str){
 	print(str);
 	printchar(' ');
 	while(OFFSET%(W*2)!=0){
-		printchar(' ');
+		OFFSET+=2;
 	}
 }
 void printint(int input){
