@@ -28,7 +28,7 @@ start:
 load_jumps:
 
 	mov bx, 0x0500
-	mov dh, 5
+	mov dh, 15
 	mov dl, [BOOT_DRIVE]
 	call disk_load
 

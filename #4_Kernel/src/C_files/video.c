@@ -15,6 +15,18 @@ void clear(){
 	}
 }
 void printchar(char x){
+	if(x=='\b'){
+		OFFSET-=2;
+		vidmem[OFFSET] = ' ';
+		return;
+	}else if(x=='\n'){
+		newline();
+		return;
+	}else if(x=='\t'){
+		OFFSET+=8;
+		return;
+	}
+
 	vidmem[OFFSET++] = x;
 	int background = vidmem[OFFSET]&0xF0;
 	vidmem[OFFSET++] = background + CURRENTCOLOR;
@@ -28,10 +40,13 @@ void print(char* str){
 }
 void println(char* str){
 	print(str);
-	printchar(' ');
+	newline();
+}
+void newline(){
+	OFFSET+=2;
 	while(OFFSET%(W*2)!=0){
-		OFFSET+=2;
-	}
+                OFFSET+=2;
+        }
 }
 void printint(int input){
 	char* output = "00000";

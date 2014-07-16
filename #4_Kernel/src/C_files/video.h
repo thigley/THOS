@@ -44,6 +44,7 @@ void printchar(char);
 void print(char*);
 void println(char*);
 void printint(int);
+void newline();
 
 int CURRENTCOLOR;
 int CURRENTBACK;
