@@ -13,26 +13,22 @@ Intended Languages: x86 Assembly, C, C++
 
 Run on: QEMU [Quick EMUlator]
 ###Versions
-05/15/14
-
+05/15/14  
 1) HelloOS - Simple 16 bit Operating System that loads and prints a hello message
 
 
 
-06/01/14
-
+06/01/14  
 2) Interactive - 16 bit Operating System that echos keyboard input to the screen
 
 
 
-07/08/14
-
+07/08/14  
 3) Bootstrapping - OS that bootstraps from a floppy to memory and jumps to the C Kernel
 
 
 
-07/17/14
-
+07/17/14  
 4) Kernel - Add functionality to the Kernel
 
 
