@@ -1,13 +1,42 @@
 #define OS "THOS"
-#define op1 "Applications"
-#define op2 "Files"
-#define op3 "About"
-#define op4 "Other"
+#define op1 "applications"
+#define op2 "files"
+#define op3 "about"
+#define op4 "other"
 
 int selectedop;
 
 void loadHello();
 void loadMenu();
+void runinput();
+int lineEq(char*);
+
+void runinput(){
+	int length = OFFSET%(W*2);
+	OFFSET -= length;
+	int i;
+	selectedop = 0;
+	if(lineEq(op1)){selectedop = 1;}
+        else if(lineEq(op2)){selectedop = 2;}
+        else if(lineEq(op3)){selectedop = 3;}
+        else if(lineEq(op4)){selectedop = 4;}
+	for(i = 0; i<length/2; i++){
+		vidmem[OFFSET++]=' ';
+		OFFSET++;
+	}
+	OFFSET-=length;
+	 outportb(0x60, 250);
+}
+int lineEq(char* op){
+	int change = 0;
+	while(op[change]!='\0'){
+		if(op[change]!=vidmem[OFFSET+(change*2)]){
+			return 0;
+		}
+		change++;
+	}
+	return 1;
+}
 
 void loadHello(){
 	selectedop = 0;

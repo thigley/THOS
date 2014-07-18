@@ -8,11 +8,10 @@ void main() {
 //	setupscancodes();
 	loadHello();
 	loadMenu();
-//	print("USER:~/");
 	while(1){
 		if(inportb(0x60)!=250&&!(inportb(0x60)&0x80)){
 			if(inportb(0x60)==0x1C){
-				selectedop =1;
+				runinput();
 				loadMenu();
 				continue;
 			}
