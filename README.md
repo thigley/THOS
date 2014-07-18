@@ -15,10 +15,13 @@ Run on: QEMU [Quick EMUlator]
 ###Versions
 1) HelloOS - Simple 16 bit Operating System that loads and prints a hello message
 
+
 2) Interactive - 16 bit Operating System that echos keyboard input to the screen
 
+07/08/14
 3) Bootstrapping - OS that bootstraps from a floppy to memory and jumps to the C Kernel
 
+07/17/14
 4) Kernel - Add functionality to the Kernel
 
 
