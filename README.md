@@ -4,14 +4,20 @@ OS Thesis Project
 
 This is a repository for Tyler Higley's Potential 2014/2015 Computer Science Senior Thesis Project. 
 ###Intention
-Write a simple functional Operating System that can:
-- Read and Write files
+Write a simple functional Operating System that:
+- Bootstraps into memory
+- Switches to 32 bit protected mode
+- Runs a C Kernel
+- Has an interrupt handler
+- Has a file System
+- Read and Writes files
 - Navigate a filesystem
 - Run applications
 
-Intended Languages: x86 Assembly, C, C++
+Languages: x86 Assembly (nasm), C (gcc)
 
-Run on: QEMU [Quick EMUlator]
+Currently run on: QEMU [Quick EMUlator] booting from floppy
+
 ###Versions
 05/15/14  
 1) HelloOS - Simple 16 bit Operating System that loads and prints a hello message
