@@ -5,9 +5,9 @@ OS Thesis Project
 This is a repository for Tyler Higley's Potential 2014/2015 Computer Science Senior Thesis Project. 
 ###Intention
 Write a simple functional Operating System that:
-- Bootstraps into memory
-- Switches to 32 bit protected mode
-- Runs a C Kernel
+√ Bootstraps into memory
+√ Switches to 32 bit protected mode
+√ Runs a C Kernel
 - Has an interrupt handler
 - Has a file System
 - Read and Writes files
@@ -35,7 +35,7 @@ Currently run on: QEMU [Quick EMUlator] booting from floppy
 
 
 07/17/14  
-4) Kernel - Add functionality to the Kernel
+4) Kernel - Changes background and text color. Takes protected mode keyboard input.
 
 
 ###Sources:
