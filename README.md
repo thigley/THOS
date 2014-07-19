@@ -1,4 +1,4 @@
-OS Thesis Project
+THOS
 =================
 **Tyler James Higley**
 
@@ -8,15 +8,17 @@ Write a simple functional Operating System that:
 √ Bootstraps into memory
 √ Switches to 32 bit protected mode
 √ Runs a C Kernel
+√ Accepts keyboard input
 - Has an interrupt handler
 - Has a file System
-- Read and Writes files
-- Navigate a filesystem
+- Navigates that filesystem
+- Read and Writes filed
 - Run applications
 
 Languages: x86 Assembly (nasm), C (gcc)
 
-Currently run on: QEMU [Quick EMUlator] booting from floppy
+Currently run on: QEMU [Quick EMUlator] booting from a floppy.
+Future goal: Creat ISO image to run in a virtual machine.
 
 ###Versions
 05/15/14  
