@@ -5,10 +5,10 @@ THOS
 This is a repository for Tyler Higley's Potential 2014/2015 Computer Science Senior Thesis Project. 
 ###Intention
 Write a simple functional Operating System that:
-√ Bootstraps into memory
-√ Switches to 32 bit protected mode
-√ Runs a C Kernel
-√ Accepts keyboard input
+- √ Bootstraps into memory
+- √ Switches to 32 bit protected mode
+- √ Runs a C Kernel
+- √ Accepts keyboard input
 - Has an interrupt handler
 - Has a file System
 - Navigates that filesystem
