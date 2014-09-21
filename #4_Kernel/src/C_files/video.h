@@ -21,30 +21,13 @@
 #define YELLOW 0x0E
 #define WHITE 0x0F
 
-#define BACKBLACK 0x00
-#define BACKBLUE 0x10
-#define BACKGREEN 0x20
-#define BACKCYAN 0x30
-#define BACKRED 0x40
-#define BACKMAGENTA 0x50
-#define BACKBROWN 0x60
-#define BACKLIGHTGRAY 0x70
-#define BACKDARKGRAY 0x80
-#define BACKLIGHTBLUE 0x90
-#define BACKLIGHTGREEN 0xA0
-#define BACKLIGHTCYAN 0xB0
-#define BACKLIGHTRED 0xC0
-#define BACKLIGHTMAGENTA 0xD0
-#define BACKYELLOW 0xE0
-#define BACKWHITE 0xF0
-
-void setup();
 void clear();
 void printchar(char);
 void print(char*);
 void println(char*);
 void printint(int);
 void newline();
+int makecolor();
 
 int CURRENTCOLOR;
 int CURRENTBACK;

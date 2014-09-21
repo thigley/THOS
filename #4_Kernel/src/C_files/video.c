@@ -11,9 +11,14 @@ void clear(){
 	int i;
 	for(i = 0; i<W*H; i++){
 		vidmem[OFFSET++] = ' ';
-		vidmem[OFFSET++] = CURRENTBACK + CURRENTCOLOR;
+		vidmem[OFFSET++] = makecolor();
 	}
 }
+
+int makecolor(){
+	return(CURRENTBACK<<4) + CURRENTCOLOR;
+}
+
 void printchar(char x){
 	if(x=='\b'){
 		OFFSET-=2;
@@ -28,8 +33,7 @@ void printchar(char x){
 	}
 
 	vidmem[OFFSET++] = x;
-	int background = vidmem[OFFSET]&0xF0;
-	vidmem[OFFSET++] = background + CURRENTCOLOR;
+	vidmem[OFFSET++] = makecolor();
 }
 void print(char* str){
         while(*str!='\0'){
