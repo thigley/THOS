@@ -12,7 +12,7 @@ Write a simple functional Operating System that:
 - Has an interrupt handler
 - Has a file System
 - Navigates that filesystem
-- Read and Writes filed
+- Read and Writes files
 - Run applications
 
 Languages: x86 Assembly (nasm), C (gcc)
