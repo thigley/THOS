@@ -46,3 +46,4 @@ Future goal: Creat ISO image to run in a virtual machine.
 - Write Your Own Operating System Tutorial - joelgompert.com
 - Writing a 16-bit Real mode OS [NASM] - appusajeev.wordpress.com
 - Onyxkernel -- First Steps -
+- Operating Systems Design and Implementation - Andrew S Tanenbaum
