@@ -1,4 +1,3 @@
-#include "C_files/Globals.c"
 #include "C_files/video.c"
 #include "C_files/builtin.c"
 #include "C_files/keyboard.c"
@@ -8,7 +7,7 @@ void main() {
 	setup();
 	loadHello();
 	loadMenu();
-	while(TRUE){
+	while(1){
 		if(inportb(0x60)!=250){ 
 			if((inportb(0x60)&0x80)){
 				if(inportb(0x60)==0xAA||inportb(0x60)==0xFA) shiftkey =0;
