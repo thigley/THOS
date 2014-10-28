@@ -1,4 +1,4 @@
-THOS - (Tyler Higley's Operating System)
+THOS
 =================
 **Tyler James Higley**
 
@@ -28,17 +28,11 @@ As of now I have implemented a bootloader that bootstraps the OS, switches from 
 - √ Switches to 32 bit protected mode
 - √ Runs a C Kernel
 - √ Accepts keyboard input
-- Functional Kernel
-- Read and Writes files
-- Interrupt handler
-- File System
-- Run applications
 
 ###Specs
 Languages: x86 Assembly (nasm), C (gcc)
 
-Currently run on: QEMU [Quick EMUlator] booting from a floppy.
-Future goal: Create ISO image to run in a virtual machine.
+Running on: QEMU [Quick EMUlator] booting from a floppy.
 
 ###Versions
 05/15/14  
@@ -61,9 +55,11 @@ Future goal: Create ISO image to run in a virtual machine.
 
 
 ###Sources:
+- Operating Systems Design and Implementation - Andrew S Tanenbaum
+- http://wiki.osdev.org
 - OS Development Series - brokenthorn.com
 - Writing a Simple Operating System — from Scratch by Nick Blundell
 - Write Your Own Operating System Tutorial - joelgompert.com
 - Writing a 16-bit Real mode OS [NASM] - appusajeev.wordpress.com
 - Onyxkernel -- First Steps -
-- Operating Systems Design and Implementation - Andrew S Tanenbaum
+
