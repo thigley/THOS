@@ -18,7 +18,7 @@ Write a simple functional Operating System that:
 Languages: x86 Assembly (nasm), C (gcc)
 
 Currently run on: QEMU [Quick EMUlator] booting from a floppy.
-Future goal: Creat ISO image to run in a virtual machine.
+Future goal: Create ISO image to run in a virtual machine.
 
 ###Versions
 05/15/14  
