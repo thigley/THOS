@@ -1,4 +1,4 @@
-THOS
+THOS - (Tyler Higley's Operating System)
 =================
 **Tyler James Higley**
 
