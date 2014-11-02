@@ -51,7 +51,7 @@ Running on: QEMU [Quick EMUlator] booting from a floppy.
 
 
 07/17/14  
-4) Kernel - Changes background and text color. Takes protected mode keyboard input.
+4) Screen_Test - Changes background and text color. Takes protected mode keyboard input.
 
 
 ###Sources:
