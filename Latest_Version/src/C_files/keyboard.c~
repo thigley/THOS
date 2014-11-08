@@ -86,7 +86,7 @@ unsigned char getchar(){
 	if(code == 0x36 || code == 0x2A) shiftkey=1;
 	if(code == 0x3A) capslock = (capslock+1)%2;
 	char ret = ((capslock+shiftkey)%2==0) ? key_scan[code] : shift_key_scan[code];
-	outportb(0x60, 250);
+	//outportb(0x60, 250);
 
 	return ret;
 }

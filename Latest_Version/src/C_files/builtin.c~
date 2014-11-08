@@ -34,10 +34,25 @@ int getCommand(char* input){
 	else if(strcmp(input,"rm")==0) return 4;
 	else if(strcmp(input,"pwd")==0) return 5;
 	else if(strcmp(input,"mkdir")==0) return 6;
-	/*else if(strcmp(input,"rmdir")==0) return 7;
-	else if(strcmp(input,"cd")==0) return 8;*/
+	else if(strcmp(input,"rmdir")==0) return 7;
+	/*else if(strcmp(input,"cd")==0) return 8;*/
 	else return 0;
 }
+/*
+//needs to be fixed
+char* get_split(char* whole, int index, char split){
+	int i=0;
+	while(i<index){
+		while(*whole!=split && *whole!='\0'){ whole++;}
+		i++;
+	}
+	char* start = whole;
+	while(*whole!= split && *whole!='\0'){ whole++;}
+	*whole = '\0';
+	whole = start;
+	return whole;
+	
+}*/
 
 int strcmp(char *str1, char *str2){
 	while(*str1!='\0'){ // contents of p1 not equal to null:

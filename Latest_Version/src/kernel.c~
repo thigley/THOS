@@ -8,6 +8,14 @@
 void main() {
 	screen_setup();
 	loadWelcome();
+	printint(1);
+	println("");
+	printint(2);
+println("");
+	printint(0);
+println("");
+	printint(-1);
+println("");
 	while(TRUE){
 		typePrompt();
 		readCommand();
