@@ -1,17 +1,18 @@
-#define TRUE 1
-#define FALSE 0
+/* kernel.c */
 
-#include "C_files/video.c"
-#include "C_files/keyboard.c"
-#include "C_files/builtin.c"
+// Includes
+#include "colors.c"
+#include "string.c"
+#include "io.c"
+#include "terminal.c"
 
-void main() {
-	screen_setup();
-	loadWelcome();
-	while(TRUE){
-		typePrompt();
-		readCommand();
-//		executeCommand();
-	}
+// Defines
+// Functions
+// Variables
+
+void kmain(void)
+{
+	shell();
+	return;
 }
 

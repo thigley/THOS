@@ -18,8 +18,8 @@ gcc -m32 -c src/kernel.c -o bin/kc.o
 echo ' - Linking Files'
 ld -m elf_i386 -T src/link.ld -o bin/kernel bin/kasm.o bin/kc.o
 
-# Step 4: Running Kernel in QEMU
-echo ' - Running Kernel in QEMU'
+# Step 4: Run Kernel in QEMU
+echo ' - Run Kernel in QEMU'
 qemu-system-i386 -kernel bin/kernel
 
 
