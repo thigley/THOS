@@ -1,0 +1,17 @@
+///////////////////////////////
+Level 1:	
+- User Interface
+	•Autoscrolling terminal
+	•Read in input
+	•Print out output
+
+- Internal File System
+	•Infrastructure
+	•Just a couple of files
+
+- Run Programs
+	•Processes
+	•Simple infrastructure
+
+Completion date goal - 2/5/15
+///////////////////////////////
