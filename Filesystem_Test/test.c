@@ -29,6 +29,14 @@ int main()
 			viewfile(input);
 			printf("\n");
 		}
+		else if(!strcmp(input, "chmod")){
+			//printf("which file: ");
+			unsigned short numod;
+			scanf("%hu", &numod);
+			scanf("%s", input);
+			int error = chmod(numod,input);
+			if(error){printf("There was an error!\n");}
+		}
 		else if(!strcmp(input, "vi")){
 			scanf("%s", input);
 			fflush(stdin);
@@ -37,7 +45,13 @@ int main()
 			char trash;
 			scanf("%c",&trash);
 			scanf("%[^\n]s", content);
-			createfile(input, content);
+
+			createorreplacefile(input, content);
+			printf("\n");
+		}
+		else if(!strcmp(input, "rm")){
+			scanf("%s", input);
+			rmfile(input);
 			printf("\n");
 		}
 		else if(!strcmp(input, "ls")){
@@ -48,8 +62,10 @@ int main()
 		}
 		else if(!strcmp(input, "help")){
 			printf("\tls \t\t\t\t- list all files\n");
+			printf("\tchmod [new mode] [file name] \t- change file permissions\n");
 			printf("\tcat [file name] \t\t- view contents of that file\n");
-			printf("\tvi [file name] \t\t\t- create file with name\n");
+			printf("\tvi [file name] \t\t\t- create or edit file with name\n");
+			printf("\trm [file name] \t\t\t- remove file with name\n");
 			printf("\tdump \t\t\t\t- view all inodes and contents of blocks\n");
 		}
 		else printf("error\n");
