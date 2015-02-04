@@ -1,4 +1,44 @@
+GENERAL GOALS
+- COMMAND LINE USER INTERFACE
+- READ FILES
+- WRITE FILES
+- FILESYSTEM
+- RUN PROGRAMS
+
+- DIRECTORIES
+- USER PROGRAMS
+- COMPILER
+- RUN ON HARDWARE
+
 ///////////////////////////////
+User Interface
+- Scrolling terminal
+- Takes in user input
+- Returns output
+- Builtin commands (clear)
+Completion date goal - 1/1/15
+///////////////////////////////
+
+///////////////////////////////
+File System
+- Test outside of project
+- Save files in inode structure
+- Print out info for testing
+- No Directories
+Completion date goal - 2/5/15
+///////////////////////////////
+
+///////////////////////////////
+Process management
+- Test outside of project
+- Get basic system operational
+- Print out info for testing
+Completion date goal - 2/19/15
+///////////////////////////////
+
+///////////////////////////////
+Stitch User Interface, File System, and Process Management together
+
 Level 1:	
 - User Interface
 	•Autoscrolling terminal
@@ -8,10 +48,17 @@ Level 1:
 - Internal File System
 	•Infrastructure
 	•Just a couple of files
+	•No Directories
 
 - Run Programs
 	•Processes
 	•Simple infrastructure
 
-Completion date goal - 2/5/15
+Completion date goal - 3/5/15
 ///////////////////////////////
+
+
+
+SHORT TERM
+-Add protection from crashing.
+-Flesh out internal data structures for filesystem
