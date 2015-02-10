@@ -1,7 +1,7 @@
 unsigned short getlength(char* s){
 	unsigned short i = 0;
 	while(s[i++]!=0);
-	return i;
+	return i-1;
 }
 
 int strcmp(char *str1, char *str2){

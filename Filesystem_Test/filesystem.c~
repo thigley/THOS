@@ -3,29 +3,47 @@
 FileSystem filesystem;
 
 
-void createfile(char* name, char* data);
-void createfilefull(char* name, char* data, unsigned short mode, unsigned short user, unsigned short group);
-void createinode(unsigned short nodenum, char* data, unsigned short mode, unsigned short user, unsigned short group);
+int createfile(char* name, char* data);
+int createfilefull(char* name, char* data, unsigned short mode, unsigned short user, unsigned short group);
+void createinode(int nodenum, char* data, unsigned short mode, unsigned short user, unsigned short group);
 void fillblocks(unsigned short directblocks[], char* data);
 void replaceblocks(int prenumblocks, unsigned short directblocks[], char* data);
-void createorreplacefile(char* name, char* data);
+int createorreplacefile(char* name, char* data);
 void replacefile(int filenum, char* data);
+int getfilenum(char* name);
 
 void initfs(){
 	filesystem.users[0] = "root";
 	filesystem.groups[0] = "root";
 	filesystem.users[1] = "thigley";
 	filesystem.groups[1] = "thigley";
+	
+	int i;
+
+	for(i=NUM_OF_INODES-1;i>=0;i--){
+		push(&filesystem.av_node,i);
+		push(&filesystem.av_file,i);
+	}
+	
+	for(i=59;i>=0;i--){
+		push(&filesystem.av_block,i);
+	}
 }
 
-void createorreplacefile(char* name, char* data){
-	int filenum = -1;
+int getfilenum(char* name){
 	int i;
-	for(i=0;i<10;i++){
-		if(!strcmp(name, filesystem.fs[i].name)){filenum=i;break;}
+	for(i=0;i<NUM_OF_INODES;i++){
+		if(filesystem.fs[i].used && !strcmp(name, filesystem.fs[i].name)){return i;}
 	}
-	if(filenum<0) createfile(name, data);
+	return -1;
+}
+
+int createorreplacefile(char* name, char* data){
+	int filenum = getfilenum(name);
+	if(filenum<0) return createfile(name, data);
 	else replacefile(filenum, data);
+
+	return 0;
 }
 
 void replacefile(int filenum, char* data){
@@ -38,36 +56,50 @@ void replacefile(int filenum, char* data){
 
 int chmod(unsigned short numod, char* name){
 	if(numod==0) return 1;
-	int filenum = -1;
-	int i;
-	for(i=0;i<10;i++){
-		if(!strcmp(name, filesystem.fs[i].name)){filenum=i;break;}
-	}
+	int filenum = getfilenum(name);
 	if(filenum<0) return 1;
-
-	filesystem.nodes[filesystem.fs[i].nodloc].mode = numod;
+	filesystem.nodes[filesystem.fs[filenum].nodloc].mode = numod;
 	return 0;
 }
 
 int rmfile(char* name){
-	if(numod==0) return 1;
-	int filenum = -1;
-	int i;
-	for(i=0;i<10;i++){
-		if(!strcmp(name, filesystem.fs[i].name)){filenum=i;break;}
-	}
+	int filenum = getfilenum(name);
 	if(filenum<0) return 1;
 
-	filesystem.fs[i].used = 0;
+	filesystem.fs[filenum].used = 0;
+	push(&filesystem.av_file,filenum);
+	push(&filesystem.av_node, filesystem.fs[filenum].nodloc);
+
+	int prenumblocks = filesystem.nodes[filesystem.fs[filenum].nodloc].size/BLOCKSIZE;
+	if(filesystem.nodes[filesystem.fs[filenum].nodloc].size%BLOCKSIZE!=0) prenumblocks++;
+	int i;
+	for(i=0;i<prenumblocks;i++){
+		push(&filesystem.av_block, filesystem.nodes[filesystem.fs[filenum].nodloc].directblocks[i]);
+	}
+
 	return 0;
 }
 
-void createfile(char* name, char* data){
-	createfilefull(name, data, 777, 0, 0);
+int createfile(char* name, char* data){
+	return createfilefull(name, data, 777, 0, 0);
 }
-void createfilefull(char* name, char* data, unsigned short mode, unsigned short user, unsigned short group){
-	int filenum = filesystem.openfile++;
-	int nodenum = filenum;
+
+int sizetoblocks(int size){
+	int blocks = size/BLOCKSIZE;
+	if(size%BLOCKSIZE!=0) blocks++;
+	return blocks;
+}
+
+int createfilefull(char* name, char* data, unsigned short mode, unsigned short user, unsigned short group){
+	//check errors
+	if(isEmpty(&filesystem.av_file)) return 1;
+	if(isEmpty(&filesystem.av_node)) return 1;
+	if(filesystem.av_block.top<sizetoblocks(getlength(data))) return 1;
+	
+
+	int filenum = pop(&filesystem.av_file);
+	int nodenum = pop(&filesystem.av_node);
+
 	int i = 0;
 	while(name[i]!=0){
 		filesystem.fs[filenum].name[i]=name[i];
@@ -75,10 +107,12 @@ void createfilefull(char* name, char* data, unsigned short mode, unsigned short 
 	}
 	filesystem.fs[filenum].used = 1;
 	filesystem.fs[filenum].nodloc = nodenum;
+
 	createinode(nodenum,data, mode, user, group);
+	return 0;
 }
 
-void createinode(unsigned short nodenum, char* data, unsigned short mode, unsigned short user, unsigned short group){
+void createinode(int nodenum, char* data, unsigned short mode, unsigned short user, unsigned short group){
 	filesystem.nodes[nodenum].mode = mode;
 	filesystem.nodes[nodenum].uid = user;
 	filesystem.nodes[nodenum].gid = group;
@@ -89,7 +123,7 @@ void createinode(unsigned short nodenum, char* data, unsigned short mode, unsign
 void fillblocks(unsigned short directblocks[], char* data){
 	int offset = 0;
 	int dbnum = 0;
-	directblocks[dbnum]=filesystem.openblock++;
+	directblocks[dbnum]=pop(&filesystem.av_block);
 	while(*data!=0){
 		char next = *data;
 		filesystem.blocks[directblocks[dbnum]].data[offset] = next;
@@ -97,7 +131,7 @@ void fillblocks(unsigned short directblocks[], char* data){
 		offset++;
 		if(offset==512){
 			offset=0;
-			directblocks[++dbnum]=filesystem.openblock++;
+			directblocks[++dbnum]=pop(&filesystem.av_block);
 		}
 	}
 }
@@ -112,7 +146,7 @@ void replaceblocks(int prenumblocks, unsigned short directblocks[], char* data){
 		offset++;
 		if(offset==512){
 			offset=0;
-			if(++dbnum>(prenumblocks-1)) directblocks[dbnum]=filesystem.openblock++;
+			if(++dbnum>(prenumblocks-1)) directblocks[dbnum]=pop(&filesystem.av_block);
 		}
 	}
 }

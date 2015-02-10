@@ -5,7 +5,6 @@ unsigned short getlength(char* s){
 }
 
 int strcmp(char *str1, char *str2){
-printf("I AM IN");
 	while(*str1!='\0'){ // contents of p1 not equal to null:
 		if(*str2=='\0') return 1; // contents of p2 equal to null: 
 		if(*str2>*str1) return -1; // contents of p2 greater than contents of p1:

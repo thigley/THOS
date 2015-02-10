@@ -1,4 +1,6 @@
 #define BLOCKSIZE 512
+#define NUM_OF_INODES 10
+#define NUM_OF_BLOCKS 60
 #include <stdio.h>
 #include "string.c"
 #include "stack.c"
@@ -7,6 +9,7 @@
 
 int main()
 {
+	
 	initfs();
 	
 	createfile("test","this is a test");
@@ -24,7 +27,6 @@ int main()
 
 		if(!strcmp(input, "exit")){return;}
 		else if(!strcmp(input, "cat")){
-			//printf("which file: ");
 			scanf("%s", input);
 			viewfile(input);
 			printf("\n");
@@ -46,13 +48,11 @@ int main()
 			scanf("%c",&trash);
 			scanf("%[^\n]s", content);
 
-			createorreplacefile(input, content);
-			printf("\n");
+			if(createorreplacefile(input, content)) printf("error\n");
 		}
 		else if(!strcmp(input, "rm")){
 			scanf("%s", input);
 			rmfile(input);
-			printf("\n");
 		}
 		else if(!strcmp(input, "ls")){
 			printfiles();
@@ -68,7 +68,7 @@ int main()
 			printf("\trm [file name] \t\t\t- remove file with name\n");
 			printf("\tdump \t\t\t\t- view all inodes and contents of blocks\n");
 		}
-		else printf("error\n");
+		else printf("Command not recognized\n");
 	}
 }
 

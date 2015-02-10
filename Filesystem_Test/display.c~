@@ -29,7 +29,7 @@ void dump(){
 	for(i=0;i<60;i++){
 		int j; 
 		for(j=0;j<512;j++) printf("%c",filesystem.blocks[i].data[j]);
-		printf("///");
+		printf("/");
 	}
 	printf("\nEND DUMP:\n");
 }
@@ -37,10 +37,7 @@ void dump(){
 void viewfile(char* name){
 	//get file num
 	int i;
-	int filenum = -1;
-	for(i=0;i<10;i++){
-		if(!strcmp(name, filesystem.fs[i].name)){filenum=i;break;}
-	}
+	int filenum = getfilenum(name);
 	if(filenum<0){printf("no such file\n"); return;}
 
 	int length = filesystem.nodes[filesystem.fs[filenum].nodloc].size;
@@ -58,7 +55,7 @@ void viewfile(char* name){
 
 void printfiles(){
 	int i;
-	for(i = 0; i<4; i++){
+	for(i = 0; i < NUM_OF_INODES; i++){
 		if(filesystem.fs[i].used==0) continue;
 		printfile(i);
 		printf("\n");

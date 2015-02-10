@@ -17,11 +17,18 @@ typedef struct Files {
 } File;
 
 typedef struct FileSystems {
-	Inode nodes[10];
+	Inode nodes[NUM_OF_INODES];
+	StackI av_node;
+
 	Datablock blocks[60];
-	File fs[10];
+	StackI av_block;
+
+	File fs[NUM_OF_INODES];
+	StackI av_file;
+
 	int openfile;
 	int openblock;
+	
 	char* users[4];
 	char* groups[4];
 } FileSystem;
