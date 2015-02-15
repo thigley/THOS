@@ -25,7 +25,7 @@ File System
 - Save files in inode structure
 - Print out info for testing
 - No Directories
-Completion date goal - 2/5/15
+Completion date goal - 2/5/15 - - Late: 2/10/15
 ///////////////////////////////
 
 ///////////////////////////////
@@ -59,6 +59,4 @@ Completion date goal - 3/5/15
 
 
 
-SHORT TERM
--Add protection from crashing.
--Flesh out internal data structures for filesystem
+
