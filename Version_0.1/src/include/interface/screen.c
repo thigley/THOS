@@ -36,7 +36,7 @@ void printchar(char x){
 		printnewline();
 		return;
 	}else if(x=='\t'){
-		typeOffset+=8;
+		while(++typeOffset%8);
 		return;
 	}
 

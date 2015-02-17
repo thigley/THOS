@@ -8,7 +8,6 @@
 
 void kmain(void)
 {
-	
 	shell();
 	return;
 }

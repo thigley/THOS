@@ -36,13 +36,14 @@ void printchar(char x){
 		printnewline();
 		return;
 	}else if(x=='\t'){
-		typeOffset+=8;
+		typeOffset+=2;
+		while(++typeOffset%8);
 		return;
 	}
 
 	vidptr[typeOffset++] = x;
 	vidptr[typeOffset++] = colors();
-	updateCursor(((typeOffset/2)/VGA_W)%VGA_H,(typeOffset/2)%VGA_W);
+	updateCursor(typeOffset/2);
 }
 void print(char* str){
 	while(*str!='\0'){

@@ -9,7 +9,7 @@
 void kmain(void)
 {
 	
-	//shell();
+	shell();
 	return;
 }
 
