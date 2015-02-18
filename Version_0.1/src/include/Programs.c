@@ -1,4 +1,7 @@
 /* Programs.c */
+void NYI(){
+	printToConsole("Error: Command not yet implemented!\n");
+}
 
 // Includes
 #include "programs/ls.c"

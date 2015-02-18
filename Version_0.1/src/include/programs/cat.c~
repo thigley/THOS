@@ -1,6 +1,6 @@
 int cat(int argc, char *argv[]){
 	if(argc!=2){ 
-		printToConsole("Error: Wrong number of arguments!\n");
+		printToConsole("Error: Wrong number of arguments!\n"):
 		return 1;
 	}
  	

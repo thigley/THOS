@@ -1,1 +1,1 @@
-int te(int argc, char *argv[]){return 0;}
+int te(int argc, char *argv[]){ NYI(); return 0;}

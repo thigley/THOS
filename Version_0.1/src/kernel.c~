@@ -8,7 +8,7 @@
 
 void kmain(void)
 {
-	
+	initfs();
 	shell();
 	return;
 }

@@ -1,7 +1,5 @@
 /* terminal.c */
-
 #include "textbuffer.c"
-
 
 void scroll(){
 	int i,j;
@@ -19,15 +17,19 @@ void typePrompt(){
 	print("root:/$ ");
 }
 
+void printCharToConsole(char c){
+	printchar(c);
+	if(((typeOffset/2)/VGA_W)==VGA_H){ 
+		scroll();
+		typeOffset = typeOffset-VGA_W*2;
+	}
+	updateCursor(typeOffset/2);
+}
+
 void printToConsole(char *s){
 	while(*s!=0) {
-		printchar(*s);
-		if(((typeOffset/2)/VGA_W)==VGA_H){ 
-			scroll();
-			typeOffset = typeOffset-VGA_W*2;
-		}
+		printCharToConsole(*s);
 	s++;}
-	updateCursor(typeOffset/2);
 }
 void clearLine(){
 	int oldpos = typeOffset;
@@ -58,6 +60,12 @@ void readCommand(){
 		print(textBuffer);
 		clearLine();
 	}
+}
+
+void splash(){
+	textColor = LIGHTRED;
+	printToConsole(spashscreen);
+	textColor = LIGHTGRAY;
 }
 
 void welcome(){
@@ -91,7 +99,7 @@ int runCommand(){
 	if(k_strcmp(command, "clear")==0){ clearScreen(); typeOffset = 0;}
 	else if(k_strcmp(command, "help")==0){ listCommands();}
 	else if(k_strcmp(command, "welcome")==0){ welcome();}
-	else if(k_strcmp(command, "splash")==0){ printToConsole(spashscreen);}
+	else if(k_strcmp(command, "splash")==0){ splash();}
 	else if(k_strcmp(command, "ls")==0){ ls(argc, argv); }
 	else if(k_strcmp(command, "cat")==0){ cat(argc, argv); }
 	else if(k_strcmp(command, "rm")==0){ rm(argc, argv); }
@@ -100,7 +108,7 @@ int runCommand(){
 	else if(k_strcmp(command, "cp")==0){ cp(argc, argv); }
 	else if(k_strcmp(command, "diff")==0){ diff(argc, argv); }
 	else if(k_strcmp(command, "wc")==0){ wc(argc, argv); }
-	// else check file
+	// else check files
 	else {
 		printToConsole("Unknown command '");
 		printToConsole(command);
@@ -112,8 +120,7 @@ int runCommand(){
 
 void shell(){
 	clearScreen();
-	textColor = LIGHTRED;
-	printToConsole(spashscreen);
+	splash();
 	welcome();
 	while(1){
 		typePrompt();

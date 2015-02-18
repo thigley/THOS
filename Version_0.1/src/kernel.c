@@ -8,6 +8,8 @@
 
 void kmain(void)
 {
+	initfs();
+	createfile("test","this is a test");
 	shell();
 	return;
 }

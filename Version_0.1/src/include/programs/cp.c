@@ -1,1 +1,1 @@
-int cp(int argc, char *argv[]){return 0;}
+int cp(int argc, char *argv[]){ NYI(); return 0;}

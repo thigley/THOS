@@ -1,1 +1,1 @@
-int chmod(int argc, char *argv[]){return 0;}
+int chmod(int argc, char *argv[]){ NYI(); return 0;}

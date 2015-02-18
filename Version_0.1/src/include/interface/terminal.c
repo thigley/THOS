@@ -1,7 +1,5 @@
 /* terminal.c */
-
 #include "textbuffer.c"
-
 
 void scroll(){
 	int i,j;
@@ -19,15 +17,19 @@ void typePrompt(){
 	print("root:/$ ");
 }
 
+void printCharToConsole(char c){
+	printchar(c);
+	if(((typeOffset/2)/VGA_W)==VGA_H){ 
+		scroll();
+		typeOffset = typeOffset-VGA_W*2;
+	}
+	updateCursor(typeOffset/2);
+}
+
 void printToConsole(char *s){
 	while(*s!=0) {
-		printchar(*s);
-		if(((typeOffset/2)/VGA_W)==VGA_H){ 
-			scroll();
-			typeOffset = typeOffset-VGA_W*2;
-		}
+		printCharToConsole(*s);
 	s++;}
-	updateCursor(typeOffset/2);
 }
 void clearLine(){
 	int oldpos = typeOffset;
@@ -78,7 +80,9 @@ void welcome(){
 void listCommands(){
 	textColor = LIGHTRED;
 	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
+	textColor = LIGHTGRAY;
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
+	textColor = LIGHTRED;
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
 	printToConsole("\tchmod [mode] [file] \t- change file permissions\n");
 	printToConsole("\tte [file] \t\t\t\t- create or edit file with name\n");
@@ -106,7 +110,7 @@ int runCommand(){
 	else if(k_strcmp(command, "cp")==0){ cp(argc, argv); }
 	else if(k_strcmp(command, "diff")==0){ diff(argc, argv); }
 	else if(k_strcmp(command, "wc")==0){ wc(argc, argv); }
-	// else check file
+	// else check files
 	else {
 		printToConsole("Unknown command '");
 		printToConsole(command);
