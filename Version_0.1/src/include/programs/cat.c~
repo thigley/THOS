@@ -20,6 +20,6 @@ int cat(int argc, char *argv[]){
 		printCharToConsole(filesystem.blocks[blocknum].data[pos++]);
 		if(pos==512) {pos=0;db++;}
 	}
- 
+ 	printToConsole("\n");
 	return 0;
 }
