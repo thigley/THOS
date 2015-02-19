@@ -78,9 +78,8 @@ void welcome(){
 }
 
 void listCommands(){
-	textColor = LIGHTRED;
-	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	textColor = LIGHTGRAY;
+	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
 	textColor = LIGHTRED;
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
@@ -92,11 +91,10 @@ void listCommands(){
 	textColor = LIGHTGRAY;
 	printToConsole("\n");
 }
-char command[10];
+
 char *argv[10];
 int runCommand(){
 	int i = 0;
-	//while(textBuffer[i]!=' ') { command[i]=textBuffer[i]; i++; }
 	int argc = splitString(textBuffer, ' ');
 	for(i =0;i<argc;i++){argv[i]=stringArray[i];}
 	

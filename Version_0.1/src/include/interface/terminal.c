@@ -26,6 +26,15 @@ void printCharToConsole(char c){
 	updateCursor(typeOffset/2);
 }
 
+void printIntToConsole(int i){
+	printint(i);
+	if(((typeOffset/2)/VGA_W)==VGA_H){ 
+		scroll();
+		typeOffset = typeOffset-VGA_W*2;
+	}
+	updateCursor(typeOffset/2);
+}
+
 void printToConsole(char *s){
 	while(*s!=0) {
 		printCharToConsole(*s);
@@ -78,9 +87,8 @@ void welcome(){
 }
 
 void listCommands(){
-	textColor = LIGHTRED;
-	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	textColor = LIGHTGRAY;
+	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
 	textColor = LIGHTRED;
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");

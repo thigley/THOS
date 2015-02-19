@@ -26,7 +26,7 @@ void dump(){
 	}
 			
 	printf("Blocks:\n");
-	for(i=0;i<60;i++){
+	for(i=0;i<NUM_OF_BLOCKS;i++){
 		int j; 
 		for(j=0;j<512;j++) printf("%c",filesystem.blocks[i].data[j]);
 		printf("/");
