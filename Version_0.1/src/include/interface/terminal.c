@@ -90,8 +90,8 @@ void listCommands(){
 	textColor = LIGHTGRAY;
 	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
-	textColor = LIGHTRED;
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
+	textColor = LIGHTRED;
 	printToConsole("\tchmod [mode] [file] \t- change file permissions\n");
 	printToConsole("\tte [file] \t\t\t\t- create or edit file with name\n");
 	printToConsole("\tcp [file] [new file]\t- make a copy of a fite\n");

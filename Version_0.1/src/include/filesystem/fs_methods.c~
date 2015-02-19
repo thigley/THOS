@@ -45,7 +45,7 @@ void replacefile(int filenum, char* data){
 	unsigned short nodenum = filesystem.fs[filenum].nodloc;
 	int prenumblocks = filesystem.nodes[nodenum].size/BLOCKSIZE;
 	if(filesystem.nodes[nodenum].size%BLOCKSIZE!=0) prenumblocks++;
-	filesystem.nodes[nodenum].size = getlength(data);
+	filesystem.nodes[nodenum].size = k_strlen(data);
 	replaceblocks(prenumblocks, filesystem.nodes[nodenum].directblocks, data);
 }
 
@@ -89,7 +89,7 @@ int createfilefull(char* name, char* data, unsigned short mode, unsigned short u
 	//check errors
 	if(isEmpty(&filesystem.av_file)) return 1;
 	if(isEmpty(&filesystem.av_node)) return 1;
-	if(filesystem.av_block.top<sizetoblocks(getlength(data))) return 1;
+	if(filesystem.av_block.top<sizetoblocks(k_strlen(data))) return 1;
 	
 
 	int filenum = pop(&filesystem.av_file);
@@ -111,7 +111,7 @@ void createinode(int nodenum, char* data, unsigned short mode, unsigned short us
 	filesystem.nodes[nodenum].mode = mode;
 	filesystem.nodes[nodenum].uid = user;
 	filesystem.nodes[nodenum].gid = group;
-	filesystem.nodes[nodenum].size = getlength(data);
+	filesystem.nodes[nodenum].size = k_strlen(data);
 	fillblocks(filesystem.nodes[nodenum].directblocks, data);
 }
 
