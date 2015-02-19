@@ -22,5 +22,4 @@ int cat(int argc, char *argv[]){
 	}
  	printToConsole("\n");
 	return 0;
-
 }
