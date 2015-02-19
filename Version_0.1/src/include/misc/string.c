@@ -56,3 +56,24 @@ void k_tolowercase(char *str){
 		i++;
 	}
 }
+char stringArray[10][16];
+int splitString(char *input, char del){
+	int i, j;
+	for(i=0; i<10; i++){
+		for(j=0; j<16; j++){
+			stringArray[i][j] = 0;
+		}
+	}
+	int count = 0;
+	i = 0;
+
+	while(*input!=0){
+		if(*input==del){ count++; i=0;}
+		else {
+			stringArray[count][i++]= *input;
+		}
+		input++;
+	}
+
+	return 1+count;
+}

@@ -80,7 +80,9 @@ void welcome(){
 void listCommands(){
 	textColor = LIGHTRED;
 	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
+	textColor = LIGHTGRAY;
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
+	textColor = LIGHTRED;
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
 	printToConsole("\tchmod [mode] [file] \t- change file permissions\n");
 	printToConsole("\tte [file] \t\t\t\t- create or edit file with name\n");
@@ -91,27 +93,30 @@ void listCommands(){
 	printToConsole("\n");
 }
 char command[10];
-int argc; char *argv[0];
+char *argv[10];
 int runCommand(){
 	int i = 0;
-	while(textBuffer[i]!=' ') { command[i]=textBuffer[i]; i++; }
+	//while(textBuffer[i]!=' ') { command[i]=textBuffer[i]; i++; }
+	int argc = splitString(textBuffer, ' ');
+	for(i =0;i<argc;i++){argv[i]=stringArray[i];}
 	
-	if(k_strcmp(command, "clear")==0){ clearScreen(); typeOffset = 0;}
-	else if(k_strcmp(command, "help")==0){ listCommands();}
-	else if(k_strcmp(command, "welcome")==0){ welcome();}
-	else if(k_strcmp(command, "splash")==0){ splash();}
-	else if(k_strcmp(command, "ls")==0){ ls(argc, argv); }
-	else if(k_strcmp(command, "cat")==0){ cat(argc, argv); }
-	else if(k_strcmp(command, "rm")==0){ rm(argc, argv); }
-	else if(k_strcmp(command, "chmod")==0){ chmod(argc, argv); }
-	else if(k_strcmp(command, "te")==0){ te(argc, argv); }
-	else if(k_strcmp(command, "cp")==0){ cp(argc, argv); }
-	else if(k_strcmp(command, "diff")==0){ diff(argc, argv); }
-	else if(k_strcmp(command, "wc")==0){ wc(argc, argv); }
+	if(k_strcmp(argv[0], "")==0){}
+	else if(k_strcmp(argv[0], "clear")==0){ clearScreen(); typeOffset = 0;}
+	else if(k_strcmp(argv[0], "help")==0){ listCommands();}
+	else if(k_strcmp(argv[0], "welcome")==0){ welcome();}
+	else if(k_strcmp(argv[0], "splash")==0){ splash();}
+	else if(k_strcmp(argv[0], "ls")==0){ ls(argc, argv); }
+	else if(k_strcmp(argv[0], "cat")==0){ cat(argc, argv); }
+	else if(k_strcmp(argv[0], "rm")==0){ rm(argc, argv); }
+	else if(k_strcmp(argv[0], "chmod")==0){ chmod(argc, argv); }
+	else if(k_strcmp(argv[0], "te")==0){ te(argc, argv); }
+	else if(k_strcmp(argv[0], "cp")==0){ cp(argc, argv); }
+	else if(k_strcmp(argv[0], "diff")==0){ diff(argc, argv); }
+	else if(k_strcmp(argv[0], "wc")==0){ wc(argc, argv); }
 	// else check files
 	else {
-		printToConsole("Unknown command '");
-		printToConsole(command);
+		printToConsole("Error: Unknown command '");
+		printToConsole(argv[0]);
 		printToConsole("'\n");
 	}
 

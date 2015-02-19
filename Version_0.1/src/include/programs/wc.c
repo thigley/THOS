@@ -1,1 +1,1 @@
-int wc(int argc, char *argv[]){ NYI(); return 0;}
+int wc(int argc, char *argv[]){ NYI(); NYI(); return 0;}
