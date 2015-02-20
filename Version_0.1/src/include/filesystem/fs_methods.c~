@@ -57,8 +57,8 @@ int fs_chmod(unsigned short numod, char* name){
 	return 0;
 }
 
-int rmfile(char* name){
-	int filenum = getfilenum(name);
+int rmfile(int filenum){
+	//int filenum = getfilenum(name);
 	if(filenum<0) return 1;
 
 	filesystem.fs[filenum].used = 0;

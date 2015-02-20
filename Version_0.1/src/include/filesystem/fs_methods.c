@@ -49,9 +49,7 @@ void replacefile(int filenum, char* data){
 	replaceblocks(prenumblocks, filesystem.nodes[nodenum].directblocks, data);
 }
 
-int fs_chmod(unsigned short numod, char* name){
-	if(numod==0) return 1;
-	int filenum = getfilenum(name);
+int fs_chmod(unsigned short numod, int filenum){
 	if(filenum<0) return 1;
 	filesystem.nodes[filesystem.fs[filenum].nodloc].mode = numod;
 	return 0;

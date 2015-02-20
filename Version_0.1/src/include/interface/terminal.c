@@ -14,7 +14,9 @@ void scroll(){
 }
 
 void typePrompt(){
+	textColor = WHITE;
 	print("root:/$ ");
+	textColor = LIGHTGRAY;
 }
 
 void printCharToConsole(char c){
@@ -91,8 +93,8 @@ void listCommands(){
 	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
-	textColor = LIGHTRED;
 	printToConsole("\tchmod [mode] [file] \t- change file permissions\n");
+	textColor = LIGHTRED;
 	printToConsole("\tte [file] \t\t\t\t- create or edit file with name\n");
 	printToConsole("\tcp [file] [new file]\t- make a copy of a fite\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
