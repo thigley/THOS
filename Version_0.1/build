@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 echo 'Building THOS Version 0.1'
 
 # Step 1: Removing Old Files
