@@ -14,7 +14,9 @@ void scroll(){
 }
 
 void typePrompt(){
+	textColor = WHITE;
 	print("root:/$ ");
+	textColor = LIGHTGRAY;
 }
 
 void printCharToConsole(char c){

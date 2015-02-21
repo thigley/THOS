@@ -31,12 +31,15 @@ void printchar(char x){
 	}else if(x=='\b'){
 		typeOffset-=2;
 		vidptr[typeOffset] = ' ';
+		updateCursor(typeOffset/2);
 		return;
 	}else if(x=='\n'){
 		printnewline();
+		updateCursor(typeOffset/2);
 		return;
 	}else if(x=='\t'){
 		while(++typeOffset%8);
+		updateCursor(typeOffset/2);
 		return;
 	}
 

@@ -94,8 +94,8 @@ void listCommands(){
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
 	printToConsole("\tchmod [mode] [file] \t- change file permissions\n");
-	textColor = LIGHTRED;
 	printToConsole("\tte [file] \t\t\t\t- create or edit file with name\n");
+	textColor = LIGHTRED;
 	printToConsole("\tcp [file] [new file]\t- make a copy of a fite\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
 	printToConsole("\twc [file] \t\t\t\t- reports lines, words, and characters of a file");
