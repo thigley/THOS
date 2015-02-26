@@ -53,16 +53,16 @@ static void lsfile(int i, int l){
 			copy = (copy%100)*10;
 		}
 
-		printCharToConsole(' ');
+		printCharToConsole('\t');
 		//user
 		printToConsole(filesystem.users[filesystem.nodes[filesystem.fs[i].nodloc].uid]);
-		printCharToConsole(' ');
+		printCharToConsole('\t');
 		//group
 		printToConsole(filesystem.groups[filesystem.nodes[filesystem.fs[i].nodloc].gid]);
-		printCharToConsole(' ');
+		printCharToConsole('\t');
 		//size
 		printIntToConsole(filesystem.nodes[filesystem.fs[i].nodloc].size);
-		printCharToConsole(' ');
+		printCharToConsole('\t');
 	}
 	//name
 	printToConsole(filesystem.fs[i].name);

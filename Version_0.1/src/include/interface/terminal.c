@@ -83,7 +83,7 @@ void welcome(){
 	textColor = WHITE;
 	printToConsole("Welcome to THOS! (THOS Has Occasional Success)\nAn Operating System by Tyler Higley ");
 	textColor = LIGHTRED;
-	printToConsole("(Features coming soon)");
+	printToConsole("(More features coming soon)");
 	textColor = LIGHTGRAY;
 	printToConsole("\n");
 }
@@ -98,8 +98,8 @@ void listCommands(){
 	textColor = LIGHTRED;
 	printToConsole("\tcp [file] [new file]\t- make a copy of a fite\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
-	printToConsole("\twc [file] \t\t\t\t- reports lines, words, and characters of a file");
 	textColor = LIGHTGRAY;
+	printToConsole("\twc [file] \t\t\t\t- reports lines, words, and characters of a file");
 	printToConsole("\n");
 }
 

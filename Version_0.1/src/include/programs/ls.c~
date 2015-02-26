@@ -8,7 +8,7 @@ int ls(int argc, char *argv[]){
 		if(filesystem.fs[i].used==0) continue;
 		lsfile(i, l);
 	} 
-	if(l) printCharToConsole('\n');
+	if(!l) printCharToConsole('\n');
 
 	return 0;
 }
