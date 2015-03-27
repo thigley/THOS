@@ -1,0 +1,8 @@
+serial --unit=0 --stop=1 --speed=115200 --parity=no --word=8
+
+default 0
+timeout 10
+
+title	THOS (THOS Has Occasional Success)
+	root (fd0)
+	kernel /kernel

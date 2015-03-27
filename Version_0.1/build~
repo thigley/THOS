@@ -25,5 +25,6 @@ echo ' - Updating Image'
 # Step 6: Running Kernel in QEMU
 echo ' - Running Kernel in QEMU'
 qemu-system-i386 -fda floppy.img
+#qemu-system-i386 -kernel bin/kernel
 
 
