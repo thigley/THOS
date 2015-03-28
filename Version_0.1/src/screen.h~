@@ -1,0 +1,7 @@
+#ifndef SCREEN_H
+#define SCREEN_H
+
+void printchar(char x);
+void print(char* str);
+
+#endif

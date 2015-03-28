@@ -13,6 +13,12 @@ void testFiles(){
 }
 int kmain(struct multiboot *mboot_ptr)
 {
+	init_descriptor_tables();
+	clearScreen();
+	println("hello again world");
+	asm volatile ("int $0x3");
+	asm volatile ("int $0x4");
+
 	initfs();
 	testFiles();
 	shell();

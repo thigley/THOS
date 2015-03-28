@@ -1,4 +1,5 @@
 /* screen.c */
+#include "../../screen.h"
 
 char *vidptr = (char*) 0xb8000; //location of video memory
 int typeOffset = 0;
@@ -13,10 +14,10 @@ void clearScreen(){
 
 void updateCursor(int offset){
 	unsigned short position = offset;
-	outportb(0x3d4, 0x0f);
-	outportb(0x3d5, position&0xff);
-	outportb(0x3d4, 0x0e);
-	outportb(0x3d5, (position>>8)&0xff);
+	outb(0x3d4, 0x0f);
+	outb(0x3d5, position&0xff);
+	outb(0x3d4, 0x0e);
+	outb(0x3d5, (position>>8)&0xff);
 }
 
 void printnewline(){

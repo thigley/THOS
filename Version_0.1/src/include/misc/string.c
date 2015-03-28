@@ -1,15 +1,26 @@
 /* string.c */
-
+#include "../../common.h"
 /* To Add
-void itoa(char *buf, unsigned long int n, int base);
-void *memcpy(char *dst, char *src, int n);
-void *memset(char *dst,char src, int n);
-*/
+void itoa(char *buf, unsigned long int n, int base);*/
+
 int k_strlen(char *str);
 int k_strcmp(char *s, char *t);
 void k_strcpy(char *s, char *t);
 void k_touppercase(char *str);
 void k_tolowercase(char *str);
+
+void memcpy(u8int *dest, const u8int *src, u32int len)
+{
+    const u8int *sp = (const u8int *)src;
+    u8int *dp = (u8int *)dest;
+    for(; len != 0; len--) *dp++ = *sp++;
+}
+
+void memset(u8int *dest, u8int val, u32int len)
+{
+    u8int *temp = (u8int *)dest;
+    for ( ; len != 0; len--) *temp++ = val;
+}
 
 int k_strlen(char *str){
 	int len = -1;

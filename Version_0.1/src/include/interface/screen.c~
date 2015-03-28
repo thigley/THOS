@@ -1,4 +1,5 @@
 /* screen.c */
+#include "../../screen.h"
 
 char *vidptr = (char*) 0xb8000; //location of video memory
 int typeOffset = 0;
@@ -35,9 +36,11 @@ void printchar(char x){
 		return;
 	}else if(x=='\n'){
 		printnewline();
+		updateCursor(typeOffset/2);
 		return;
 	}else if(x=='\t'){
 		while(++typeOffset%8);
+		updateCursor(typeOffset/2);
 		return;
 	}
 
