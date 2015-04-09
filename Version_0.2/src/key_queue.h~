@@ -11,6 +11,6 @@ struct key_queue
 };
 
 void add_key(unsigned char scan, char next);
-key remove_key();
+char remove_key();
 int key_queue_is_empty();
 void display_key_queue();

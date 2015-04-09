@@ -31,7 +31,7 @@ void charFromBuffer(int pos){
 
 	while(next!=0){
 		textBuffer[pos-1] = next;
-		next = textBuffer[pos++];
+		next = textBuffer[++pos];
 	}
 	textBuffer[pos-1] = next;
 }

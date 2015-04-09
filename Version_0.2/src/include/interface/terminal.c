@@ -53,29 +53,34 @@ void clearLine(){
 		printchar(' ');
 	}while(typeOffset/2%VGA_W!=0);
 	typeOffset = oldpos;
-	updateCursor(typeOffset/2);
 }
 
 void readCommand(){
 	clearBuffer();
-	int pos = 0, line=((typeOffset/2)/VGA_W);//%VGA_H;
+	int pos = 0, line=((typeOffset/2)/VGA_W); //%VGA_H;
 	clearLine();
-	char next;
+	updateCursor(typeOffset/2);
+	key next;
 	while(1){
 		if(key_queue_is_empty()) continue;
 		next = remove_key();
-		if(next=='\n') {
+		if(next.scancode==75 && pos>0){pos--;}			//left arrow
+		if(next.scancode==77 && pos<bufferLength()-1){pos++;}	//right arrow
+		if(next.key=='\n') {
 			if(typeOffset>(VGA_H-1)*VGA_W*2) {scroll();typeOffset-=2*VGA_W;}
 			typeOffset=(typeOffset+VGA_W*2)-(typeOffset/2)%VGA_W*2;
 			return;
-		}else if(next=='\b') {if(pos==0) continue; else charFromBuffer(pos--);}
-		else if(next!=0) {if(pos>(BUFFERSIZE)/2-4) continue; else charToBuffer(next, pos++);}
+		}else if(next.key=='\b') {if(pos==0) continue; else charFromBuffer(pos--);}
+		else if(next.key!=0) {if(pos>(BUFFERSIZE)/2-4) continue; else charToBuffer(next.key, pos++);}
 
 		if(line==VGA_H-1 && bufferLength()>=VGA_W){scroll();line--;}
 		typeOffset = line*VGA_W*2;
 		typePrompt();
+		int save = typeOffset;
 		print(textBuffer);
 		clearLine();
+		typeOffset = save+pos*2;
+		updateCursor(typeOffset/2);
 	}
 }
 
@@ -149,7 +154,7 @@ void shell(){
 	while(1){
 		typePrompt();
 		readCommand();
-		//addToHistory(line);
+		//addToHistory();
 		runCommand();
 	}
 }

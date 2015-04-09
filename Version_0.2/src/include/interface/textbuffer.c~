@@ -1,6 +1,6 @@
 /* textbuffer.c */
 
-#define BUFFERSIZE VAG_W*4
+#define BUFFERSIZE VGA_W*4
 char textBuffer[BUFFERSIZE];
 
 void clearBuffer(){

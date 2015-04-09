@@ -68,16 +68,17 @@ static void editfile(char *filename){
 	printbuffer();
 	int location = k_strlen(file_buffer);
 	typeTeBottom();
+	key next;
 	while(1){
 		if(key_queue_is_empty()) continue;
-		char next = remove_key();
+		next = remove_key();
 		if(mode){
-			if(next==27) { mode =0;
+			if(next.key==27) { mode =0;
 				typeTeBottom();
 				continue;
 			}
-			if(next==0) continue;
-			if(next!='\b') file_buffer[location++]=next;
+			if(next.key==0) continue;
+			if(next.key!='\b') file_buffer[location++]=next.key;
 			else file_buffer[--location]=0;
 			clearScreen();
 			printbuffer();

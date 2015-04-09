@@ -151,13 +151,9 @@ static void keyboard_handler(registers_t regs)
 	else if(scancode==56) optkey = 1;
 	else if(scancode==58) capslock = (capslock+1)%5;
 	else {
-		if(lshiftkey||rshiftkey) 	printchar(shift_key_scan[scancode]);
-		else if(capslock) 		printchar(caps_key_scan[scancode]);
-		else{
- 			//printchar(key_scan[scancode]);
-			add_key(key_scan[scancode]);
-			display_key_queue();
-		}
+		if(lshiftkey||rshiftkey) 	add_key(shift_key_scan[scancode]);
+		else if(capslock) 		add_key(caps_key_scan[scancode]);
+		else				add_key(key_scan[scancode]);
 	}
     }
 }

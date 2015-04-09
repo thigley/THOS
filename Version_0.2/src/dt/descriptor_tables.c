@@ -29,6 +29,7 @@ void init_descriptor_tables()
    init_idt();
 
    memset(&interrupt_handlers, 0, sizeof(isr_t)*256);
+   asm volatile ("sti");
 }
 
 static void init_gdt()

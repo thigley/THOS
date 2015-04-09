@@ -68,24 +68,24 @@ static void editfile(char *filename){
 	printbuffer();
 	int location = k_strlen(file_buffer);
 	typeTeBottom();
-	char next;
+	key next;
 	while(1){
 		if(key_queue_is_empty()) continue;
 		next = remove_key();
 		if(mode){
-			if(next==27) { mode =0;
+			if(next.key==27) { mode =0;
 				typeTeBottom();
 				continue;
 			}
-			if(next==0) continue;
-			if(next!='\b') file_buffer[location++]=next;
+			if(next.key==0) continue;
+			if(next.key!='\b') file_buffer[location++]=next.key;
 			else file_buffer[--location]=0;
 			clearScreen();
 			printbuffer();
 		} else{
-			if(next=='q') break;
-			else if(next=='w') createorreplacefile(filename, file_buffer);
-			else if(next=='e') { mode = 1; clearScreen(); printbuffer();}
+			if(next.key=='q') break;
+			else if(next.key=='w') createorreplacefile(filename, file_buffer);
+			else if(next.key=='e') { mode = 1; clearScreen(); printbuffer();}
 		}
 	}
 }
