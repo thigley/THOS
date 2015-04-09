@@ -59,10 +59,14 @@ void readCommand(){
 	clearBuffer();
 	int pos = 0, line=((typeOffset/2)/VGA_W); //%VGA_H;
 	clearLine();
+	updateCursor(typeOffset/2);
 	key next;
 	while(1){
 		if(key_queue_is_empty()) continue;
 		next = remove_key();
+		printint(next.scancode);
+		print(" ");
+		continue;
 		if(next.scancode==75 && pos>0){pos--;}			//left arrow
 		if(next.scancode==77 && pos<bufferLength()-1){pos++;}	//right arrow
 		if(next.key=='\n') {
@@ -110,7 +114,7 @@ void listCommands(){
 	printToConsole("\tchmod [mode] [file] \t- change file permissions\n");
 	printToConsole("\tte [file] \t\t\t\t- create or edit file with name\n");
 	textColor = LIGHTRED;
-	printToConsole("\tcp [file] [new file]\t- make a copy of a fite\n");
+	printToConsole("\tcp [file] [new file]\t- make a copy of a file\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
 	textColor = LIGHTGRAY;
 	printToConsole("\twc [file] \t\t\t\t- reports lines, words, and characters of a file");

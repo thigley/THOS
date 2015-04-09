@@ -5,6 +5,10 @@ static void load(int filenum);
 static void editfile(char *filename);
 static void printbuffer();
 static void typeTeBottom();
+static int fileBufferLength();
+static void addToFileBuff(char c, int pos);
+static void removeFromFileBuff(int pos);
+static int getScreenPos(int loc);
 
 char console_save[VGA_W*VGA_H*2];
 char file_buffer[VGA_W*VGA_H];
@@ -67,27 +71,92 @@ static void editfile(char *filename){
 	int mode = 0; //1 edit mode
 	printbuffer();
 	int location = k_strlen(file_buffer);
+	typeOffset =(location+1)*2;
+	updateCursor(typeOffset/2);
 	typeTeBottom();
 	key next;
 	while(1){
 		if(key_queue_is_empty()) continue;
 		next = remove_key();
 		if(mode){
+			if(next.scancode==75 && location>0){
+				location--;
+				typeOffset =2*getScreenPos(location);
+				updateCursor(typeOffset/2);}//left arrow
+			if(next.scancode==77 && location<fileBufferLength()-1){
+				location++;
+				typeOffset =2*getScreenPos(location);
+				updateCursor(typeOffset/2);}//right arrow
+			if(next.scancode==72 && getScreenPos(location)>VGA_W){
+				int desired = getScreenPos(location)-VGA_W;
+				while(getScreenPos(location)>desired) location--;
+				typeOffset =2*getScreenPos(location);
+				updateCursor(typeOffset/2);}//up arrow
+			if(next.scancode==80 && 
+			getScreenPos(location)/VGA_W<getScreenPos(fileBufferLength())/VGA_W){
+				int desired = getScreenPos(location)+VGA_W;
+				while(getScreenPos(location)<desired &&
+					location<fileBufferLength()-1) location++;
+				if(getScreenPos(location)>desired) location--;
+				typeOffset =2*getScreenPos(location);
+				updateCursor(typeOffset/2);}//down arrow
 			if(next.key==27) { mode =0;
 				typeTeBottom();
 				continue;
 			}
 			if(next.key==0) continue;
-			if(next.key!='\b') file_buffer[location++]=next.key;
-			else file_buffer[--location]=0;
+			if(next.key!='\b') addToFileBuff(next.key, location++);//file_buffer[location++]=next.key;
+			else removeFromFileBuff(location--);//file_buffer[--location]=0;
 			clearScreen();
 			printbuffer();
+			typeOffset = 2*getScreenPos(location);
+			updateCursor(typeOffset/2);
 		} else{
 			if(next.key=='q') break;
 			else if(next.key=='w') createorreplacefile(filename, file_buffer);
 			else if(next.key=='e') { mode = 1; clearScreen(); printbuffer();}
 		}
 	}
+}
+
+static int fileBufferLength(){
+	int ret = 0;
+	while(file_buffer[ret++]!=0);
+	return ret;
+}
+
+static int getScreenPos(int loc){
+	int single = 0;
+	int ret = 0;
+	while(single<loc){
+		if(file_buffer[single]=='\t'){
+			ret+=4-(ret%4);
+		}else if(file_buffer[single]=='\n'){
+			ret+=VGA_W-(ret%VGA_W);
+		}else ret++;
+		single++;
+	}
+	return ret;
+}
+
+static void addToFileBuff(char c, int pos){
+	char next = c, after = file_buffer[pos];
+
+	while(next!=0){
+		file_buffer[pos++] = next;
+		next = after;
+		after = file_buffer[pos];
+	}
+}
+
+static void removeFromFileBuff(int pos){
+	char next = file_buffer[pos];
+
+	while(next!=0){
+		file_buffer[pos-1] = next;
+		next = file_buffer[++pos];
+	}
+	file_buffer[pos-1] = next;
 }
 
 static void printbuffer(){
