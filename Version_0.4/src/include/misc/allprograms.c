@@ -28,3 +28,6 @@ void printHistory();
 void lookupHistory();
 void lookdownHistory();
 void topHistory();
+
+//pong
+void pong();

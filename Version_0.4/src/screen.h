@@ -4,6 +4,7 @@
 void clearScreen();
 void updateCursor(int offset);
 void printnewline();
+void putchar(char x, int loc);
 void printchar(char x);
 void print(char* str);
 void println(char* str);

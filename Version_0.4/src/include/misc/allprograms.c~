@@ -9,9 +9,11 @@ int cp(int argc, char *argv[]);
 int diff(int argc, char *argv[]);
 int wc(int argc, char *argv[]);
 int su(int argc, char *argv[]);
-
-/*
 int chown(int argc, char *argv[]);
+int echo(int argc, char *argv[]);
+int useradd(int argc, char *argv[]);
+int passwd(int argc, char *argv[]);
+/*
 int chgrp(int argc, char *argv[]);
 int mv(int argc, char *argv[]);
 int pwd(int argc, char *argv[]);
@@ -26,3 +28,6 @@ void printHistory();
 void lookupHistory();
 void lookdownHistory();
 void topHistory();
+
+//pong
+void pong();

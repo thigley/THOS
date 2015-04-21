@@ -3,12 +3,13 @@ int su(int argc, char *argv[]){
 		printToConsole("Error: Wrong number of arguments!\n");
 		return 1;
 	}
+
 	int uservar = -1;
 	int i,j;
 	for(i=0; i<4;i++){ 
 		j=0;
-		while(filesystem.users[0][j]!=0){
-			if(filesystem.users[0][j]!=argv[1][j]) goto next;
+		while(filesystem.users[i][j]!=0){
+			if(filesystem.users[i][j]!=argv[1][j]) goto next;
 			j++;
 		}
 		uservar = i;

@@ -4,18 +4,7 @@ int su(int argc, char *argv[]){
 		return 1;
 	}
 
-	int uservar = -1;
-	int i,j;
-	for(i=0; i<4;i++){ 
-		j=0;
-		while(filesystem.users[i][j]!=0){
-			if(filesystem.users[i][j]!=argv[1][j]) goto next;
-			j++;
-		}
-		uservar = i;
-		break;
-		next:;
-	}
+	int uservar = getusernum(argv[1]);
 	
 	if(uservar==-1){
 		printToConsole("Error: No such user!\n");

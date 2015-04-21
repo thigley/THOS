@@ -27,6 +27,10 @@ void printnewline(){
 	} while(typeOffset%(VGA_W*2)!=0);
 }
 
+void putchar(char x, int loc){
+	vidptr[loc*2] = x;
+}
+
 void printchar(char x){
 	if(x==0){ return;
 	}else if(x=='\b'){

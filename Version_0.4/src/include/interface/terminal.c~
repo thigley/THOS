@@ -144,6 +144,7 @@ int runCommand(){
 	if(k_strcmp(argv[0], "")==0){}
 	else if(k_strcmp(argv[0], "clear")==0){ clearScreen(); typeOffset = 0;}
 	else if(k_strcmp(argv[0], "history")==0){ printHistory();}
+	else if(k_strcmp(argv[0], "pong")==0){ pong();}
 	else if(k_strcmp(argv[0], "help")==0){ listCommands();}
 	else if(k_strcmp(argv[0], "welcome")==0){ welcome();}
 	else if(k_strcmp(argv[0], "splash")==0){ splash();}
@@ -156,6 +157,10 @@ int runCommand(){
 	else if(k_strcmp(argv[0], "diff")==0){ diff(argc, argv); }
 	else if(k_strcmp(argv[0], "wc")==0){ wc(argc, argv); }
 	else if(k_strcmp(argv[0], "su")==0){ su(argc, argv); }
+	else if(k_strcmp(argv[0], "chown")==0){ chown(argc, argv); }
+	else if(k_strcmp(argv[0], "echo")==0){ echo(argc, argv); }
+	else if(k_strcmp(argv[0], "useradd")==0){ chown(argc, argv); }
+	else if(k_strcmp(argv[0], "passwd")==0){ passwd(argc, argv); }
 	// else check files
 	else {
 		printToConsole("Error: Unknown command '");

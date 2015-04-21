@@ -18,4 +18,5 @@ void NYI(){
 #include "programs/echo.c"
 #include "programs/adduser.c"
 #include "programs/passwd.c"
+#include "programs/pong.c"
 

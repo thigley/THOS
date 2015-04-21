@@ -14,10 +14,10 @@ void clearScreen(){
 
 void updateCursor(int offset){
 	unsigned short position = offset;
-	outportb(0x3d4, 0x0f);
-	outportb(0x3d5, position&0xff);
-	outportb(0x3d4, 0x0e);
-	outportb(0x3d5, (position>>8)&0xff);
+	outb(0x3d4, 0x0f);
+	outb(0x3d5, position&0xff);
+	outb(0x3d4, 0x0e);
+	outb(0x3d5, (position>>8)&0xff);
 }
 
 void printnewline(){
@@ -25,6 +25,10 @@ void printnewline(){
 		vidptr[typeOffset++]= ' ';
 		vidptr[typeOffset++]=colors();
 	} while(typeOffset%(VGA_W*2)!=0);
+}
+
+void putchar(char x, int row, int col){
+	vidptr[(row*VGA_W+col)*2] = x;
 }
 
 void printchar(char x){

@@ -124,11 +124,11 @@ void listCommands(){
 	printToConsole("\twc [file] \t\t\t\t- reports lines, words, and characters of a file\n");
 	printToConsole("\thistory \t\t\t\t- display previous 15 commands\n");
 	printToConsole("\tsu [user] \t\t\t\t- switch current user\n");
+	printToConsole("\tchown [user] [file]\t\t- change owner of a file\n");
 	textColor = LIGHTRED;
 	printToConsole("\tCOMING SOON:\n");
 	printToConsole("\tcp [file] [new file]\t- make a copy of a file\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
-	printToConsole("\tchown [user] [file]\t\t- change owner of a file\n");
 	printToConsole("\techo [string]\t\t\t- print string to screen\n");
 	printToConsole("\tuseradd [user]\t\t\t- add new user\n");
 	printToConsole("\tpasswd\t\t\t\t\t- change password for current user\n");
@@ -144,6 +144,7 @@ int runCommand(){
 	if(k_strcmp(argv[0], "")==0){}
 	else if(k_strcmp(argv[0], "clear")==0){ clearScreen(); typeOffset = 0;}
 	else if(k_strcmp(argv[0], "history")==0){ printHistory();}
+	else if(k_strcmp(argv[0], "pong")==0){ pong();}
 	else if(k_strcmp(argv[0], "help")==0){ listCommands();}
 	else if(k_strcmp(argv[0], "welcome")==0){ welcome();}
 	else if(k_strcmp(argv[0], "splash")==0){ splash();}

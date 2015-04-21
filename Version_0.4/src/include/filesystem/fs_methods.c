@@ -32,6 +32,22 @@ int getfilenum(char* name){
 	return -1;
 }
 
+int getusernum(char* name){
+	int uservar = -1;
+	int i,j;
+	for(i=0; i<4;i++){ 
+		j=0;
+		while(filesystem.users[i][j]!=0){
+			if(filesystem.users[i][j]!=name[j]) goto next;
+			j++;
+		}
+		uservar = i;
+		break;
+		next:;
+	}
+	return uservar;
+}
+
 int createorreplacefile(char* name, char* data){
 	int filenum = getfilenum(name);
 	if(filenum<0) return createfile(name, data);
@@ -51,6 +67,12 @@ void replacefile(int filenum, char* data){
 int fs_chmod(unsigned short numod, int filenum){
 	if(filenum<0) return 1;
 	filesystem.nodes[filesystem.fs[filenum].nodloc].mode = numod;
+	return 0;
+}
+
+int fs_chown(int nuuse, int filenum){
+	if(filenum<0) return 1;
+	filesystem.nodes[filesystem.fs[filenum].nodloc].uid = nuuse;
 	return 0;
 }
 
