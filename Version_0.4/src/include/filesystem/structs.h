@@ -42,6 +42,6 @@ typedef struct FileSystems {
 	int openfile;
 	int openblock;
 	
-	char* users[4];
-	char* groups[4];
+	char users[5][16];
+	char *groups[5];
 } FileSystem;

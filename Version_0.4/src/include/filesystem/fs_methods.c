@@ -5,11 +5,13 @@ void testFiles(){
 }
 
 void initfs(){
-	filesystem.users[0] = "root";
+	char *root[] = {"root","root"};
+	adduser(2,root);
+	char *thigley[] = {"thigley","thigley"};
+	adduser(2,thigley);
+
 	filesystem.groups[0] = "root";
-	filesystem.users[1] = "thigley";
 	filesystem.groups[1] = "thigley";
-	
 	int i;
 
 	for(i=NUM_OF_INODES-1;i>=0;i--){
@@ -33,19 +35,9 @@ int getfilenum(char* name){
 }
 
 int getusernum(char* name){
-	int uservar = -1;
-	int i,j;
-	for(i=0; i<4;i++){ 
-		j=0;
-		while(filesystem.users[i][j]!=0){
-			if(filesystem.users[i][j]!=name[j]) goto next;
-			j++;
-		}
-		uservar = i;
-		break;
-		next:;
-	}
-	return uservar;
+	int i;
+	for(i=0; i<5;i++) if(!k_strcmp(name, filesystem.users[i])) return i;
+	return -1;
 }
 
 int createorreplacefile(char* name, char* data){

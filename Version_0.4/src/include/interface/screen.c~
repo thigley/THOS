@@ -27,8 +27,8 @@ void printnewline(){
 	} while(typeOffset%(VGA_W*2)!=0);
 }
 
-void putchar(char x, int row, int col){
-	vidptr[(row*VGA_W+col)*2] = x;
+void putchar(char x, int loc){
+	vidptr[loc*2] = x;
 }
 
 void printchar(char x){

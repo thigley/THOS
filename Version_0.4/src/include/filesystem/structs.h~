@@ -1,4 +1,7 @@
 #include "stack.h"
+#define BLOCKSIZE 512
+#define NUM_OF_INODES 10
+#define NUM_OF_BLOCKS 60
 int createfile(char* name, char* data);
 int createfilefull(char* name, char* data, unsigned short mode, unsigned short user, unsigned short group);
 void createinode(int nodenum, char* data, unsigned short mode, unsigned short user, unsigned short group);
@@ -39,6 +42,6 @@ typedef struct FileSystems {
 	int openfile;
 	int openblock;
 	
-	char* users[4];
-	char* groups[4];
+	char users[5][16];
+	char groups[5];
 } FileSystem;

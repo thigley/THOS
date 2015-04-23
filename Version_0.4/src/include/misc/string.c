@@ -79,11 +79,10 @@ int splitString(char *input, char del){
 	i = 0;
 
 	while(*input!=0){
-		if(*input==del){ count++; i=0;}
+		if(*input==del){ while(*input==del){ input++;}count++; i=0;}
 		else {
-			stringArray[count][i++]= *input;
+			stringArray[count][i++]= *input++;
 		}
-		input++;
 	}
 
 	return 1+count;

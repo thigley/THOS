@@ -11,7 +11,8 @@ int wc(int argc, char *argv[]);
 int su(int argc, char *argv[]);
 int chown(int argc, char *argv[]);
 int echo(int argc, char *argv[]);
-int useradd(int argc, char *argv[]);
+int adduser(int argc, char *argv[]);
+int deluser(int argc, char *argv[]);
 int passwd(int argc, char *argv[]);
 /*
 int chgrp(int argc, char *argv[]);

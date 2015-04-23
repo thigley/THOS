@@ -1,38 +1,27 @@
 /* string.c */
 #include "../../common.h"
 /* To Add
-void itoa(char *buf, unsigned long int n, int base);
-unsigned char *memcpy(unsigned char *dest, const unsigned char *src, int count);
-unsigned char *memset(unsigned char *dest, unsigned char val, int count);
-unsigned short *memsetw(unsigned short *dest, unsigned short val, int count);*/
+void itoa(char *buf, unsigned long int n, int base);*/
 
 int k_strlen(char *str);
 int k_strcmp(char *s, char *t);
 void k_strcpy(char *s, char *t);
 void k_touppercase(char *str);
 void k_tolowercase(char *str);
-/*
-unsigned char *memcpy(unsigned char *dest, const unsigned char *src, int count)
+
+void memcpy(u8int *dest, const u8int *src, u32int len)
 {
-  int i;
-  for (i=0; i<count;i++) dest[i]=src[i];
-  return dest;
+    const u8int *sp = (const u8int *)src;
+    u8int *dp = (u8int *)dest;
+    for(; len != 0; len--) *dp++ = *sp++;
 }
 
-unsigned char *memset(unsigned char *dest, unsigned char val, int count)
+void memset(u8int *dest, u8int val, u32int len)
 {
-  int i;
-  for (i=0; i<count;i++) dest[i]=val;
-  return dest;
+    u8int *temp = (u8int *)dest;
+    for ( ; len != 0; len--) *temp++ = val;
 }
 
-unsigned short *memsetw(unsigned short *dest, unsigned short val, int count)
-{
-  int i;
-  for (i=0; i<count;i++) dest[i]=val;
-  return dest;
-}
-*/
 int k_strlen(char *str){
 	int len = -1;
 	while(str[1+len++]!=0);
@@ -90,7 +79,7 @@ int splitString(char *input, char del){
 	i = 0;
 
 	while(*input!=0){
-		if(*input==del){ count++; i=0;}
+		if(*input==del){ while(*input==del){ input++;}count++; i=0;}
 		else {
 			stringArray[count][i++]= *input;
 		}

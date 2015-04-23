@@ -29,6 +29,7 @@ void printnewline(){
 
 void putchar(char x, int loc){
 	vidptr[loc*2] = x;
+	vidptr[loc*2+1] = colors();
 }
 
 void printchar(char x){

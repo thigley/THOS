@@ -54,15 +54,4 @@ int deluser(int argc, char *argv[]){
 	for(j=0;j<16;j++){
 		filesystem.users[4][j] = 0;
 	}
-	addusercurrentnum--;
-	printToConsole(filesystem.users[0]);
-	printToConsole("\n");
-	printToConsole(filesystem.users[1]);
-	printToConsole("\n");
-	printToConsole(filesystem.users[2]);
-	printToConsole("\n");
-	printToConsole(filesystem.users[3]);
-	printToConsole("\n");
-	printToConsole(filesystem.users[4]);
-	printToConsole("\n");
 }

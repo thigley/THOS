@@ -125,13 +125,14 @@ void listCommands(){
 	printToConsole("\thistory \t\t\t\t- display previous 15 commands\n");
 	printToConsole("\tsu [user] \t\t\t\t- switch current user\n");
 	printToConsole("\tchown [user] [file]\t\t- change owner of a file\n");
-	textColor = LIGHTRED;
-	printToConsole("\tCOMING SOON:\n");
+	printToConsole("\tadduser [user]\t\t\t- add new user\n");
+	printToConsole("\tdeluser [user]\t\t\t- remove user\n");
+	printToConsole("\techo [word]...\t\t\t- print text to screen\n");
+	/*
 	printToConsole("\tcp [file] [new file]\t- make a copy of a file\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
-	printToConsole("\techo [string]\t\t\t- print string to screen\n");
-	printToConsole("\tuseradd [user]\t\t\t- add new user\n");
 	printToConsole("\tpasswd\t\t\t\t\t- change password for current user\n");
+	*/
 
 }
 
@@ -159,7 +160,8 @@ int runCommand(){
 	else if(k_strcmp(argv[0], "su")==0){ su(argc, argv); }
 	else if(k_strcmp(argv[0], "chown")==0){ chown(argc, argv); }
 	else if(k_strcmp(argv[0], "echo")==0){ echo(argc, argv); }
-	else if(k_strcmp(argv[0], "useradd")==0){ chown(argc, argv); }
+	else if(k_strcmp(argv[0], "adduser")==0){ adduser(argc, argv); }
+	else if(k_strcmp(argv[0], "deluser")==0){ deluser(argc, argv); }
 	else if(k_strcmp(argv[0], "passwd")==0){ passwd(argc, argv); }
 	// else check files
 	else {
