@@ -6,7 +6,6 @@ int rm(int argc, char *argv[]);
 int chmod(int argc, char *argv[]);
 int te(int argc, char *argv[]);
 int cp(int argc, char *argv[]);
-int diff(int argc, char *argv[]);
 int wc(int argc, char *argv[]);
 int su(int argc, char *argv[]);
 int chown(int argc, char *argv[]);
@@ -15,14 +14,19 @@ int adduser(int argc, char *argv[]);
 int deluser(int argc, char *argv[]);
 int listus();
 int passwd(int argc, char *argv[]);
-/*
-int chgrp(int argc, char *argv[]);
-int mv(int argc, char *argv[]);
+
+//dir
 int pwd(int argc, char *argv[]);
 int cd(int argc, char *argv[]);
 int mkdir(int argc, char *argv[]);
 int rmdir(int argc, char *argv[]);
+
+//future
+/*
+int chgrp(int argc, char *argv[]);
+int mv(int argc, char *argv[]);
 */
+int diff(int argc, char *argv[]);
 
 //history
 void addToHistory(char* next);

@@ -109,7 +109,7 @@ void welcome(){
 	textColor = WHITE;
 	printToConsole("! (THOS Has Occasional Success)\nTyler Higley's Operating System ");
 	textColor = LIGHTRED;
-	printToConsole("(Version 0.4)");
+	printToConsole("(Version 0.8)");
 	textColor = LIGHTGRAY;
 	printToConsole("\n");
 }
@@ -127,9 +127,9 @@ void listCommands(){
 	printToConsole("\tchown [user] [file]\t\t- change owner of a file\n");
 	printToConsole("\tadduser [user]\t\t\t- add new user\n");
 	printToConsole("\tdeluser [user]\t\t\t- remove user\n");
-	printToConsole("\tlistus \t\t\t\t- list users\n");
+	printToConsole("\tlistus \t\t\t\t\t- list users\n");
 	printToConsole("\techo [word]...\t\t\t- print text to screen\n");
-	printToConsole("\tpasswd [new password]\t\t\t- change password for current user\n");
+	printToConsole("\tpasswd [new password]\t- change password for current user\n");
 	/*
 	printToConsole("\tcp [file] [new file]\t- make a copy of a file\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
@@ -165,6 +165,12 @@ int runCommand(){
 	else if(k_strcmp(argv[0], "deluser")==0){ deluser(argc, argv); }
 	else if(k_strcmp(argv[0], "listus")==0){ listus(); }
 	else if(k_strcmp(argv[0], "passwd")==0){ passwd(argc, argv); }
+
+	else if(k_strcmp(argv[0], "mkdir")==0){ mkdir(argc, argv); }
+	else if(k_strcmp(argv[0], "rmdir")==0){ rmdir(argc, argv); }
+	else if(k_strcmp(argv[0], "cd")==0){ cd(argc, argv); }
+	else if(k_strcmp(argv[0], "pwd")==0){ pwd(argc, argv); }
+
 	// else check files
 	else {
 		printToConsole("Error: Unknown command '");

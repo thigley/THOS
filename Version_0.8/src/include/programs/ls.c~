@@ -4,17 +4,19 @@ int ls(int argc, char *argv[]){
 	if(argc>1 &&(k_strcmp(argv[1], "-l")==0)) l = 1;
 
 	int i;
-	for(i = 0; i < NUM_OF_INODES; i++){
+	for(i = 0; i < filesystem.nodes[filesystem.fs[dir].nodloc].size; i++){
+		lsfile(filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i], l);
+	} 
+	/*for(i = 0; i < NUM_OF_INODES; i++){
 		if(filesystem.fs[i].used==0) continue;
 		lsfile(i, l);
-	} 
+	} */
 	if(!l) printCharToConsole('\n');
 
 	return 0;
 }
 
 static void lsfile(int i, int l){
-
 	if(l){
 		unsigned int copy = filesystem.nodes[filesystem.fs[i].nodloc].mode;
 		//dir?
@@ -55,7 +57,7 @@ static void lsfile(int i, int l){
 
 		printCharToConsole('\t');
 		//user
-		printToConsole(filesystem.users[filesystem.nodes[filesystem.fs[i].nodloc].uid]);
+		printToConsole(filesystem.users[filesystem.nodes[filesystem.fs[i].nodloc].uid].name);
 		printCharToConsole('\t');
 		//group
 		printToConsole(filesystem.groups[filesystem.nodes[filesystem.fs[i].nodloc].gid]);

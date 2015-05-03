@@ -1,20 +1,22 @@
-static void lsfile(int filenum, int l);
+static void lsfile(int filenum, int l, int numin);
 int ls(int argc, char *argv[]){ 
 	int l = 0;
 	if(argc>1 &&(k_strcmp(argv[1], "-l")==0)) l = 1;
 
 	int i;
-	for(i = 0; i < NUM_OF_INODES; i++){
+	for(i = 0; i < filesystem.nodes[filesystem.fs[dir].nodloc].size; i++){
+		lsfile(filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i], l, i);
+	} 
+	/*for(i = 0; i < NUM_OF_INODES; i++){
 		if(filesystem.fs[i].used==0) continue;
 		lsfile(i, l);
-	} 
+	} */
 	if(!l) printCharToConsole('\n');
 
 	return 0;
 }
 
-static void lsfile(int i, int l){
-
+static void lsfile(int i, int l, int numin){
 	if(l){
 		unsigned int copy = filesystem.nodes[filesystem.fs[i].nodloc].mode;
 		//dir?
@@ -65,6 +67,8 @@ static void lsfile(int i, int l){
 		printCharToConsole('\t');
 	}
 	//name
-	printToConsole(filesystem.fs[i].name);
+	if(numin==0) printCharToConsole('.');
+	else if(numin==1) printToConsole("..");
+	else printToConsole(filesystem.fs[i].name);
 	printCharToConsole(l?'\n':' ');
 }

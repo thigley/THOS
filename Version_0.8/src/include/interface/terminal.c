@@ -1,6 +1,7 @@
 /* terminal.c */
 #include "textbuffer.c"
 int user = 0;
+int dir = 0;
 
 void scroll(){
 	int i,j;
@@ -20,7 +21,8 @@ void typePrompt(){
 	textColor = LIGHTRED;
 	print("@THOS:");
 	textColor = WHITE;
-	print("/$ ");
+	print(filesystem.fs[dir].name);
+	print("$ ");
 	textColor = LIGHTGRAY;
 }
 
@@ -165,6 +167,12 @@ int runCommand(){
 	else if(k_strcmp(argv[0], "deluser")==0){ deluser(argc, argv); }
 	else if(k_strcmp(argv[0], "listus")==0){ listus(); }
 	else if(k_strcmp(argv[0], "passwd")==0){ passwd(argc, argv); }
+
+	else if(k_strcmp(argv[0], "mkdir")==0){ mkdir(argc, argv); }
+	else if(k_strcmp(argv[0], "rmdir")==0){ rmdir(argc, argv); }
+	else if(k_strcmp(argv[0], "cd")==0){ cd(argc, argv); }
+	else if(k_strcmp(argv[0], "pwd")==0){ pwd(argc, argv); }
+
 	// else check files
 	else {
 		printToConsole("Error: Unknown command '");

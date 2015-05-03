@@ -117,7 +117,7 @@ static void editfile(char *filename, int canEdit){
 			updateCursor(typeOffset/2);
 		} else{
 			if(next.key=='q') break;
-			else if(next.key=='w') createorreplacefile(filename, file_buffer);
+			else if(next.key=='w') { if(canEdit) createorreplacefile(filename, file_buffer);}
 			else if(next.key=='e') { mode = 1; clearScreen(); printbuffer();}
 		}
 	}

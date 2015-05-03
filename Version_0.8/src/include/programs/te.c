@@ -26,7 +26,7 @@ int te(int argc, char *argv[]){
 	// find file
 	int filenum = getfilenum(argv[1]);
 	if(user && !(checkperm(filenum)&4)){printToConsole("You do not have permission!\n"); return 1;}
-	int canEdit = (checkperm(filenum)&2)?1:0;
+	int canEdit = (filenum<0 || (checkperm(filenum)&2))?1:0;
 	te_bottom= canEdit?te_bottom_write:te_bottom_read;
 	// save console
 	int i;

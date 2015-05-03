@@ -19,5 +19,4 @@ void NYI(){
 #include "programs/adduser.c"
 #include "programs/passwd.c"
 #include "programs/pong.c"
-#include "programs/dir.c"
 

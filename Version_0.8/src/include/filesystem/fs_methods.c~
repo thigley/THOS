@@ -1,7 +1,7 @@
 void testFiles(){
 	createfile("test","this is a test");
-	createfilefull("long_test","This test will be considerably longer than the others. The reason for this is to test the filesystems ability to use multiple blocks. In 'test', all of the data fit into a single block so we weren't able to really see if the system was working. In contrast, this file is long enough (more than 512 bytes) that it will need to be stored in multiple blocks. This will not only test it's own ability to store longer files, but also make sure that the next file has no issues caused by side effects of this longer file.",750,1,1);
-	createfilefull("final_test","Boo! I'm a ghost!!!! Fear me! Muhahahaha!",750,0,1);
+	createfilefull("long_test","This test will be considerably longer than the others. The reason for this is to test the filesystems ability to use multiple blocks. In 'test', all of the data fit into a single block so we weren't able to really see if the system was working. In contrast, this file is long enough (more than 512 bytes) that it will need to be stored in multiple blocks. This will not only test it's own ability to store longer files, but also make sure that the next file has no issues caused by side effects of this longer file.",755,1,1);
+	createfilefull("final_test","Boo! I'm a ghost!!!! Fear me! Muhahahaha!",777,0,1);
 }
 
 void initfs(){
@@ -22,7 +22,8 @@ void initfs(){
 	for(i=NUM_OF_BLOCKS-1;i>=0;i--){
 		push(&filesystem.av_block,i);
 	}
-	
+
+	createdir("/");
 	testFiles();
 }
 
@@ -89,6 +90,15 @@ int rmfile(int filenum){
 int createfile(char* name, char* data){
 	return createfilefull(name, data, 750, 0, 0);
 }
+int createdir(char* name){
+	int result = createfilefull(name, "", 1755, 0, 0);
+	if(result==0){
+		int self = getfilenum(name);
+		result+=addFileToDir(self, self);
+		result+=addFileToDir(dir, self);
+	}
+	return result;
+}
 
 int sizetoblocks(int size){
 	int blocks = size/BLOCKSIZE;
@@ -105,6 +115,12 @@ int createfilefull(char* name, char* data, unsigned short mode, unsigned short u
 
 	int filenum = pop(&filesystem.av_file);
 	int nodenum = pop(&filesystem.av_node);
+	if(addFileToDir(filenum,dir)){
+		push(&filesystem.av_file, filenum);
+		push(&filesystem.av_node,nodenum);
+		printToConsole("Error: Adding File to Directory\n");
+		return 1;
+	}
 
 	int i = 0;
 	while(name[i]!=0){
@@ -163,4 +179,14 @@ int checkperm(int inode){
 	unsigned short mode = filesystem.nodes[inode].mode;
 	int isOwner = (user==filesystem.nodes[inode].uid)?1:0;
 	return isOwner?mode/100:mode%10;
+}
+
+int addFileToDir(int filenum, int dir){
+	int insert =0;
+	int node = filesystem.fs[dir].nodloc;
+	int size = filesystem.nodes[node].size++;
+	if(size>5) {return 1;}
+	filesystem.nodes[node].directblocks[size] = filenum;
+
+	return 0;
 }
