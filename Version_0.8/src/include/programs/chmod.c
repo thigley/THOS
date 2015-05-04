@@ -6,7 +6,7 @@ int chmod(int argc, char *argv[]){
 
 	unsigned short numod = 0;
 	int i;
-	for(i=0;i<3;i++){
+	for(i=k_strlen(argv[1])-3;i<k_strlen(argv[1]);i++){
 		numod*=10;
 		if(argv[1][i]=='7') numod+=7;
 		if(argv[1][i]=='6') numod+=6;
@@ -21,7 +21,7 @@ int chmod(int argc, char *argv[]){
 	 	return 1;
 	}
 
-	int filenum = getfilenum(argv[2]);
+	int filenum = getfilenum(argv[2], dir);
 	if(filenum<0){
 		printToConsole("Error: File not found!\n");
 	 	return 1;

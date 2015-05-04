@@ -67,8 +67,10 @@ static void lsfile(int i, int l, int numin){
 		printCharToConsole('\t');
 	}
 	//name
+	if(!l && filesystem.nodes[filesystem.fs[i].nodloc].mode>1000) textColor = WHITE;
 	if(numin==0) printCharToConsole('.');
 	else if(numin==1) printToConsole("..");
 	else printToConsole(filesystem.fs[i].name);
+	textColor = LIGHTGRAY;
 	printCharToConsole(l?'\n':' ');
 }

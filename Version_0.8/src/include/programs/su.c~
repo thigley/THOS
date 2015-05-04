@@ -21,7 +21,7 @@ int su(int argc, char *argv[]){
 			char next = remove_key().key;
 			if(next=='\n') break;
 			else if(next=='\b'){
-				input[--i]=0;
+				if(i>0) input[--i]=0;
 			}
 			else if(next==0) continue;
 			else input[i++]=next;
@@ -30,8 +30,6 @@ int su(int argc, char *argv[]){
 	printCharToConsole('\n');
 	if(!k_strcmp(input,filesystem.users[uservar].passwd)) user = uservar;
 	else {printToConsole("Incorrect Password!\n");}
-
-//FINISH!!
 
 	return 0;
 }

@@ -4,7 +4,7 @@ int chown(int argc, char *argv[]){
 		return 1;
 	}
 	int nuuse = getusernum(argv[1]);
-	int filenum = getfilenum(argv[2]);
+	int filenum = getfilenum(argv[2], dir);
 	if(filenum<0){
 		printToConsole("Error: File not found!\n");
 	 	return 1;

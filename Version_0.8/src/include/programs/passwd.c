@@ -18,7 +18,7 @@ int passwd(int argc, char *argv[]){
 				char next = remove_key().key;
 				if(next=='\n') break;
 				else if(next=='\b'){
-					input[--i]=0;
+					if(i>0) input[--i]=0;
 				}
 				else if(next==0) continue;
 				else input[i++]=next;
@@ -37,7 +37,7 @@ int passwd(int argc, char *argv[]){
 			char next = remove_key().key;
 			if(next=='\n') break;
 			else if(next=='\b'){
-				input[--i]=0;
+				if(i>0) input[--i]=0;
 			}
 			else if(next==0) continue;
 			else input[i++]=next;

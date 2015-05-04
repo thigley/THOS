@@ -9,6 +9,7 @@ int chown(int argc, char *argv[]){
 		printToConsole("Error: File not found!\n");
 	 	return 1;
 	}
+	if(user && user!=filesystem.nodes[filesystem.fs[filenum].nodloc].uid){printToConsole("You do not have permission!\n"); return 1;}
 	if(nuuse<0){
 		printToConsole("Error: User not found!\n");
 	 	return 1;

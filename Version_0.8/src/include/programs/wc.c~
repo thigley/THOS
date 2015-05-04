@@ -9,6 +9,7 @@ int wc(int argc, char *argv[]){
 	int i;
 	int filenum = getfilenum(name);
 	if(filenum<0){printToConsole("Error: No such file!\n"); return 1;}
+	if(user && !(checkperm(filenum)&4)){printToConsole("You do not have permission!\n"); return 1;}
 
 	int length = filesystem.nodes[filesystem.fs[filenum].nodloc].size;
 	int db = 0;

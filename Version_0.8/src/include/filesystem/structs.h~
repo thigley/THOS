@@ -16,7 +16,7 @@ typedef struct Inodes {
 	unsigned short uid;
 	unsigned short gid;
 	unsigned short size;		
-	unsigned short directblocks[5];
+	unsigned short directblocks[8];
 } Inode;
 
 typedef struct Datablocks {

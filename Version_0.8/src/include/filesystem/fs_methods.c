@@ -1,4 +1,12 @@
 void testFiles(){
+	createdir("foo");
+	dir = 1;
+	createdir("bar");
+	dir = 2;
+	createdir("qux");
+	dir = 3;
+	createfile("folder_test","this is a test nested in a folder");
+	dir = 0;
 	createfile("test","this is a test");
 	createfilefull("long_test","This test will be considerably longer than the others. The reason for this is to test the filesystems ability to use multiple blocks. In 'test', all of the data fit into a single block so we weren't able to really see if the system was working. In contrast, this file is long enough (more than 512 bytes) that it will need to be stored in multiple blocks. This will not only test it's own ability to store longer files, but also make sure that the next file has no issues caused by side effects of this longer file.",755,1,1);
 	createfilefull("final_test","Boo! I'm a ghost!!!! Fear me! Muhahahaha!",777,0,1);
@@ -27,11 +35,21 @@ void initfs(){
 	testFiles();
 }
 
-int getfilenum(char* name){
+int getfilenum(char* name, int folder){
+	int dirnloc = filesystem.fs[folder].nodloc;
 	int i;
-	for(i=0;i<NUM_OF_INODES;i++){
+/*	for(i=0;i<NUM_OF_INODES;i++){
 		if(filesystem.fs[i].used && !k_strcmp(name, filesystem.fs[i].name)){return i;}
+	}*/
+	
+
+
+	for(i=2;i<filesystem.nodes[dirnloc].size;i++){
+		if(!k_strcmp(name, 
+			filesystem.fs[filesystem.nodes[dirnloc].directblocks[i]	].name))
+		{return filesystem.nodes[dirnloc].directblocks[i];}
 	}
+	
 	return -1;
 }
 
@@ -42,7 +60,7 @@ int getusernum(char* name){
 }
 
 int createorreplacefile(char* name, char* data){
-	int filenum = getfilenum(name);
+	int filenum = getfilenum(name, dir);
 	if(filenum<0) return createfile(name, data);
 	else replacefile(filenum, data);
 
@@ -59,7 +77,9 @@ void replacefile(int filenum, char* data){
 
 int fs_chmod(unsigned short numod, int filenum){
 	if(filenum<0) return 1;
-	filesystem.nodes[filesystem.fs[filenum].nodloc].mode = numod;
+	filesystem.nodes[filesystem.fs[filenum].nodloc].mode /= 1000;
+	filesystem.nodes[filesystem.fs[filenum].nodloc].mode *= 1000;
+	filesystem.nodes[filesystem.fs[filenum].nodloc].mode += numod;
 	return 0;
 }
 
@@ -69,9 +89,28 @@ int fs_chown(int nuuse, int filenum){
 	return 0;
 }
 
+void removefromfolder(int filenum){
+	int found = 0;
+	int i;
+	for(i=0;i<filesystem.nodes[filesystem.fs[dir].nodloc].size;i++){
+		if(found){
+			filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i-1]=
+			filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i];
+		}else{
+			if(filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i]==filenum){
+				found = 1;
+			}
+		}
+	}
+	filesystem.nodes[filesystem.fs[dir].nodloc].size--;
+}
+
 int rmfile(int filenum){
-	//int filenum = getfilenum(name);
 	if(filenum<0) return 1;
+
+	int i;
+
+	removefromfolder(filenum);
 
 	filesystem.fs[filenum].used = 0;
 	push(&filesystem.av_file,filenum);
@@ -79,7 +118,7 @@ int rmfile(int filenum){
 
 	int prenumblocks = filesystem.nodes[filesystem.fs[filenum].nodloc].size/BLOCKSIZE;
 	if(filesystem.nodes[filesystem.fs[filenum].nodloc].size%BLOCKSIZE!=0) prenumblocks++;
-	int i;
+
 	for(i=0;i<prenumblocks;i++){
 		push(&filesystem.av_block, filesystem.nodes[filesystem.fs[filenum].nodloc].directblocks[i]);
 	}
@@ -93,7 +132,7 @@ int createfile(char* name, char* data){
 int createdir(char* name){
 	int result = createfilefull(name, "", 1755, 0, 0);
 	if(result==0){
-		int self = getfilenum(name);
+		int self = getfilenum(name, dir);
 		result+=addFileToDir(self, self);
 		result+=addFileToDir(dir, self);
 	}
@@ -181,9 +220,8 @@ int checkperm(int inode){
 	return isOwner?mode/100:mode%10;
 }
 
-int addFileToDir(int filenum, int dir){
-	int insert =0;
-	int node = filesystem.fs[dir].nodloc;
+int addFileToDir(int filenum, int dirnum){
+	int node = filesystem.fs[dirnum].nodloc;
 	int size = filesystem.nodes[node].size++;
 	if(size>8) {return 1;}
 	filesystem.nodes[node].directblocks[size] = filenum;

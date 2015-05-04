@@ -20,6 +20,7 @@ int pwd(int argc, char *argv[]);
 int cd(int argc, char *argv[]);
 int mkdir(int argc, char *argv[]);
 int rmdir(int argc, char *argv[]);
+int mv(int argc, char *argv[]);
 
 //future
 /*

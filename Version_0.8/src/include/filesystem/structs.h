@@ -9,7 +9,7 @@ void fillblocks(unsigned short directblocks[], char* data);
 void replaceblocks(int prenumblocks, unsigned short directblocks[], char* data);
 int createorreplacefile(char* name, char* data);
 void replacefile(int filenum, char* data);
-int getfilenum(char* name);
+int getfilenum(char* name, int folder);
 
 typedef struct Inodes {
 	unsigned short mode;

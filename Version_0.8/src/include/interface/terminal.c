@@ -2,6 +2,7 @@
 #include "textbuffer.c"
 int user = 0;
 int dir = 0;
+char *argv[10];
 
 void scroll(){
 	int i,j;
@@ -57,6 +58,24 @@ void clearLine(){
 	typeOffset = oldpos;
 }
 
+char *autoComp(char *sofar){
+	int i,j;
+	char* theOne;
+	int thisOne=1;
+	int count = 0;
+	for(i=2;i<filesystem.nodes[filesystem.fs[dir].nodloc].size;i++){
+		thisOne=1;
+		for(j=0;j<k_strlen(sofar);j++){
+			if(sofar[j]!=filesystem.fs[filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i]].name[j])
+				{ thisOne=0; break;}
+		}
+		if(thisOne){ theOne = filesystem.fs[filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i]].name; count++;}
+	}
+	theOne+=k_strlen(sofar);
+	if(count==1) return theOne;
+	else return "";
+}
+
 void readCommand(){
 	clearBuffer();
 	int pos = 0, line=((typeOffset/2)/VGA_W); //%VGA_H;
@@ -84,7 +103,13 @@ void readCommand(){
 			typeOffset=(typeOffset+VGA_W*2)-(typeOffset/2)%VGA_W*2;
 			return;
 		}else if(next.key=='\b') {if(pos==0) continue; else charFromBuffer(pos--);}
-		else if(next.key!=0) {if(pos>(BUFFERSIZE)/2-4) continue; else charToBuffer(next.key, pos++);}
+		else if(next.key=='\t') {
+			int num = splitString(textBuffer, ' ');
+			int i;
+			for(i =0;i<num;i++){argv[i]=stringArray[i];}
+			char *ac = autoComp(argv[i-1]);
+			while(*ac!=0) {charToBuffer(*ac,pos++); ac++;}
+		}else if(next.key!=0) {if(pos>(BUFFERSIZE)/2-4) continue; else charToBuffer(next.key, pos++);}
 
 		if(line==VGA_H-1 && bufferLength()>=VGA_W){scroll();line--;}
 		typeOffset = line*VGA_W*2;
@@ -131,7 +156,12 @@ void listCommands(){
 	printToConsole("\tdeluser [user]\t\t\t- remove user\n");
 	printToConsole("\tlistus \t\t\t\t\t- list users\n");
 	printToConsole("\techo [word]...\t\t\t- print text to screen\n");
-	printToConsole("\tpasswd [new password]\t- change password for current user\n");
+	printToConsole("\tpasswd\t\t\t\t\t- change password for current user\n");
+	printToConsole("\tpwd\t\t\t\t\t\t- print working directory\n");
+	printToConsole("\tcd [folder]\t\t\t\t- change directory to folder\n");
+	printToConsole("\tmkdir [directory]\t\t- make new directory\n");
+	printToConsole("\trmdir [directory]\t\t- remove empty directory\n");
+	printToConsole("\tmv [file] [directory]\t- move file to directory\n");
 	/*
 	printToConsole("\tcp [file] [new file]\t- make a copy of a file\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
@@ -139,7 +169,6 @@ void listCommands(){
 
 }
 
-char *argv[10];
 int runCommand(){
 	int i = 0;
 	int argc = splitString(textBuffer, ' ');
@@ -172,6 +201,7 @@ int runCommand(){
 	else if(k_strcmp(argv[0], "rmdir")==0){ rmdir(argc, argv); }
 	else if(k_strcmp(argv[0], "cd")==0){ cd(argc, argv); }
 	else if(k_strcmp(argv[0], "pwd")==0){ pwd(argc, argv); }
+	else if(k_strcmp(argv[0], "mv")==0){ mv(argc, argv); }
 
 	// else check files
 	else {
