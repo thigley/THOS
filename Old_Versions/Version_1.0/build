@@ -1,0 +1,33 @@
+#!/bin/bash
+set -e
+echo 'Building THOS Version 0.4'
+
+# Step 1: Removing Old Files
+echo ' - Removing Old Files'
+rm bin/*
+
+# Step 2: Compiling Assembly Files
+echo ' - Compiling Assembly Files'
+nasm -f elf32 src/start.asm -o bin/start.o
+nasm -f elf32 src/include/dt/gdt.asm -o bin/gdt.o
+nasm -f elf32 src/include/dt/interrupt.asm -o bin/interrupt.o
+
+# Step 3: Compiling C Files
+echo ' - Compiling C Files'
+gcc -m32 -c -nostdlib -nostdinc -fno-builtin -fno-stack-protector src/kernel.c -o bin/kc.o
+gcc -m32 -c -nostdlib -nostdinc -fno-builtin -fno-stack-protector src/include/dt/descriptor_tables.c -o bin/descriptor_tables.o
+gcc -m32 -c -nostdlib -nostdinc -fno-builtin -fno-stack-protector src/include/dt/isr.c -o bin/isr.o
+
+# Step 4: Linking Files
+echo ' - Linking Files'
+ld -m elf_i386 -T src/link.ld -o bin/kernel bin/start.o bin/kc.o bin/descriptor_tables.o bin/isr.o bin/interrupt.o bin/gdt.o
+
+# Step 5: Update Image
+echo ' - Updating Image'
+./update_image.sh
+
+# Step 6: Running Kernel in QEMU
+echo ' - Running Kernel in QEMU'
+qemu-system-i386 -fda floppy.img
+
+
