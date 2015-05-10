@@ -1,4 +1,5 @@
-//it should be noted that files are restricted to the size of the screen.
+/* te.c 
+it should be noted that files are restricted to the size of the screen. */
 
 static void setupte(int filenum);
 static void load(int filenum);
@@ -109,8 +110,8 @@ static void editfile(char *filename, int canEdit){
 				continue;
 			}
 			if(next.key==0) continue;
-			if(next.key!='\b') addToFileBuff(next.key, location++);//file_buffer[location++]=next.key;
-			else removeFromFileBuff(location--);//file_buffer[--location]=0;
+			if(next.key!='\b') addToFileBuff(next.key, location++);
+			else removeFromFileBuff(location--);
 			clearScreen();
 			printbuffer();
 			typeOffset = 2*getScreenPos(location);

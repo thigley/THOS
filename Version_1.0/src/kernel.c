@@ -6,7 +6,7 @@
 FileSystem filesystem;
 #include "include/Misc.c"
 #include "include/Interface.c"
-#include "include/Filesystem.c"
+#include "include/filesystem/fs_methods.c"
 #include "include/Programs.c"
 #include "include/keyboard/keyboard.c"
 
@@ -18,7 +18,6 @@ int kmain(/*struct multiboot *mboot_ptr*/)
 	
 	initfs();
 
-	clearScreen();
 	shell();
 	return 0xDEADBABA;
 }

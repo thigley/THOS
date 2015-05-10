@@ -51,7 +51,7 @@ int deluser(int argc, char *argv[]){
 int listus(){
 	int i;
 	for(i=0;i<NUM_OF_USERS;i++){
-		if(!filesystem.users[i].name) break;
+		if(!filesystem.users[i].name[0]) break;
 		printToConsole(filesystem.users[i].name);
 		printToConsole("\n");
 	}

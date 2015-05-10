@@ -1,3 +1,6 @@
+/* adduser.c 
+adduser, deluser, and listus (list users) */
+
 int addusercurrentnum = 0;
 int adduser(int argc, char *argv[]){
 	if(argc!=2){ 

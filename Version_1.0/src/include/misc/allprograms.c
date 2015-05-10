@@ -4,7 +4,6 @@ int ls(int argc, char *argv[]);
 int cat(int argc, char *argv[]);
 int rm(int argc, char *argv[]);
 int chmod(int argc, char *argv[]);
-int te(int argc, char *argv[]);
 int cp(int argc, char *argv[]);
 int wc(int argc, char *argv[]);
 int su(int argc, char *argv[]);
@@ -22,13 +21,6 @@ int mkdir(int argc, char *argv[]);
 int rmdir(int argc, char *argv[]);
 int mv(int argc, char *argv[]);
 
-//future
-/*
-int chgrp(int argc, char *argv[]);
-int mv(int argc, char *argv[]);
-*/
-int diff(int argc, char *argv[]);
-
 //history
 void addToHistory(char* next);
 void printHistory();
@@ -36,5 +28,12 @@ void lookupHistory();
 void lookdownHistory();
 void topHistory();
 
-//pong
+//other
 void pong();
+int te(int argc, char *argv[]);
+
+//future
+/*
+int chgrp(int argc, char *argv[]);
+int diff(int argc, char *argv[]);
+*/

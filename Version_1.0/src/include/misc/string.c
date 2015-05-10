@@ -1,7 +1,6 @@
 /* string.c */
+
 #include "../common.h"
-/* To Add
-void itoa(char *buf, unsigned long int n, int base);*/
 
 int k_strlen(char *str);
 int k_strcmp(char *s, char *t);
@@ -67,11 +66,11 @@ void k_tolowercase(char *str){
 		i++;
 	}
 }
-char stringArray[10][16];
+char stringArray[20][32];
 int splitString(char *input, char del){
 	int i, j;
-	for(i=0; i<10; i++){
-		for(j=0; j<16; j++){
+	for(i=0; i<20; i++){
+		for(j=0; j<32; j++){
 			stringArray[i][j] = 0;
 		}
 	}

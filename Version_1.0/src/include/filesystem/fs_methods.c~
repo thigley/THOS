@@ -1,3 +1,5 @@
+/* fs_methods.c */
+
 void testFiles(){
 	createdir("foo");
 	dir = 1;
@@ -227,8 +229,4 @@ int addFileToDir(int filenum, int dirnum){
 	filesystem.nodes[node].directblocks[size] = filenum;
 
 	return 0;
-}
-
-char *autoComp(char *sofar){
-	return "this is a test";
 }

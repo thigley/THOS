@@ -20,13 +20,14 @@ int pwd(int argc, char *argv[]);
 int cd(int argc, char *argv[]);
 int mkdir(int argc, char *argv[]);
 int rmdir(int argc, char *argv[]);
+int mv(int argc, char *argv[]);
 
 //future
 /*
 int chgrp(int argc, char *argv[]);
-int mv(int argc, char *argv[]);
-*/
 int diff(int argc, char *argv[]);
+*/
+
 
 //history
 void addToHistory(char* next);

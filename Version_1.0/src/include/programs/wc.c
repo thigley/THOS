@@ -1,3 +1,5 @@
+/* wc.c */
+
 int wc(int argc, char *argv[]){
 	if(argc!=2){ 
 		printToConsole("Error: Wrong number of arguments!\n");

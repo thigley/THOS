@@ -1,3 +1,5 @@
+/* fs_methods.c */
+
 void testFiles(){
 	createdir("foo");
 	dir = 1;
@@ -38,11 +40,6 @@ void initfs(){
 int getfilenum(char* name, int folder){
 	int dirnloc = filesystem.fs[folder].nodloc;
 	int i;
-/*	for(i=0;i<NUM_OF_INODES;i++){
-		if(filesystem.fs[i].used && !k_strcmp(name, filesystem.fs[i].name)){return i;}
-	}*/
-	
-
 
 	for(i=2;i<filesystem.nodes[dirnloc].size;i++){
 		if(!k_strcmp(name, 
@@ -63,7 +60,6 @@ int createorreplacefile(char* name, char* data){
 	int filenum = getfilenum(name, dir);
 	if(filenum<0) return createfile(name, data);
 	else replacefile(filenum, data);
-
 	return 0;
 }
 
@@ -151,7 +147,6 @@ int createfilefull(char* name, char* data, unsigned short mode, unsigned short u
 	if(isEmpty(&filesystem.av_node)) return 1;
 	if(filesystem.av_block.top<sizetoblocks(k_strlen(data))) return 1;
 	
-
 	int filenum = pop(&filesystem.av_file);
 	int nodenum = pop(&filesystem.av_node);
 	if(addFileToDir(filenum,dir)){

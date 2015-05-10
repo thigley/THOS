@@ -1,3 +1,5 @@
+/* stack.h */
+
 #define max 60
 
 typedef struct StackIs{

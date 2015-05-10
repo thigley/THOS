@@ -1,3 +1,5 @@
+/* key_queue.h */
+
 typedef struct key
 {
 	unsigned char scancode;

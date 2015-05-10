@@ -1,3 +1,6 @@
+/* common.h 
+From JamesM's kernel development tutorials */
+
 #ifndef COMMON_H
 #define COMMON_H
 

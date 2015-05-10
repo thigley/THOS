@@ -1,4 +1,5 @@
 /* terminal.c */
+
 #include "textbuffer.c"
 int user = 0;
 int dir = 0;
@@ -78,16 +79,14 @@ char *autoComp(char *sofar){
 
 void readCommand(){
 	clearBuffer();
-	int pos = 0, line=((typeOffset/2)/VGA_W); //%VGA_H;
+	int pos = 0, line=((typeOffset/2)/VGA_W);
 	clearLine();
 	updateCursor(typeOffset/2);
 	key next;
 	while(1){
 		if(key_queue_is_empty()) continue;
 		next = remove_key();
-		/*printint(next.scancode);
-		print(" ");
-		continue;*/
+
 		if(next.scancode==75 && pos>0){pos--;}			//left arrow
 		if(next.scancode==77 && pos<bufferLength()-1){pos++;}	//right arrow
 		if(next.scancode==72) {
@@ -134,15 +133,18 @@ void welcome(){
 	textColor = LIGHTRED;
 	printToConsole("THOS");
 	textColor = WHITE;
-	printToConsole("! (THOS Has Occasional Success)\nTyler Higley's Operating System ");
+	printToConsole("! (THOS Has Occasional Success) ");
 	textColor = LIGHTRED;
-	printToConsole("(Version 0.8)");
+	printToConsole("(Version 1.0)");
+	textColor = WHITE;
+	printToConsole("\nTyler Higley's Operating System -- Type 'help' for list of commands");
 	textColor = LIGHTGRAY;
 	printToConsole("\n");
 }
 
 void listCommands(){
 	textColor = LIGHTGRAY;
+	printToConsole("\tclear \t\t\t\t\t\t- clears the terminal screen\n");
 	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
@@ -162,11 +164,10 @@ void listCommands(){
 	printToConsole("\tmkdir [directory]\t\t- make new directory\n");
 	printToConsole("\trmdir [directory]\t\t- remove empty directory\n");
 	printToConsole("\tmv [file] [directory]\t- move file to directory\n");
-	/*
+	/* Future Work
 	printToConsole("\tcp [file] [new file]\t- make a copy of a file\n");
 	printToConsole("\tdiff [file 1] [file 2]\t- compare two files\n");
 	*/
-
 }
 
 int runCommand(){
@@ -176,11 +177,12 @@ int runCommand(){
 	
 	if(k_strcmp(argv[0], "")==0){}
 	else if(k_strcmp(argv[0], "clear")==0){ clearScreen(); typeOffset = 0;}
-	else if(k_strcmp(argv[0], "history")==0){ printHistory();}
-	else if(k_strcmp(argv[0], "pong")==0){ pong();}
 	else if(k_strcmp(argv[0], "help")==0){ listCommands();}
 	else if(k_strcmp(argv[0], "welcome")==0){ welcome();}
 	else if(k_strcmp(argv[0], "splash")==0){ splash();}
+
+	else if(k_strcmp(argv[0], "history")==0){ printHistory();}
+	else if(k_strcmp(argv[0], "pong")==0){ pong();}
 	else if(k_strcmp(argv[0], "ls")==0){ ls(argc, argv); }
 	else if(k_strcmp(argv[0], "cat")==0){ cat(argc, argv); }
 	else if(k_strcmp(argv[0], "rm")==0){ rm(argc, argv); }
@@ -196,14 +198,11 @@ int runCommand(){
 	else if(k_strcmp(argv[0], "deluser")==0){ deluser(argc, argv); }
 	else if(k_strcmp(argv[0], "listus")==0){ listus(); }
 	else if(k_strcmp(argv[0], "passwd")==0){ passwd(argc, argv); }
-
 	else if(k_strcmp(argv[0], "mkdir")==0){ mkdir(argc, argv); }
 	else if(k_strcmp(argv[0], "rmdir")==0){ rmdir(argc, argv); }
 	else if(k_strcmp(argv[0], "cd")==0){ cd(argc, argv); }
 	else if(k_strcmp(argv[0], "pwd")==0){ pwd(argc, argv); }
 	else if(k_strcmp(argv[0], "mv")==0){ mv(argc, argv); }
-
-	// else check files
 	else {
 		printToConsole("Error: Unknown command '");
 		printToConsole(argv[0]);

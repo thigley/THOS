@@ -1,3 +1,5 @@
+/* history.c */
+
 static char histBuffer[BUFFERSIZE][15];
 static int histpeak = 15;
 

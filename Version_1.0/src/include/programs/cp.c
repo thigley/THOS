@@ -1,12 +1,4 @@
-int cp(int argc, char *argv[]){
-	if(argc!=3){ 
-		printToConsole("Error: Wrong number of arguments!\n");
-		return 1;
-	}
+/* cp.c 
+Method not yet Implemented */
 
-	int filenum = getfilenum(argv[1], dir);
-	if(filenum<0){printToConsole("Error: No such file!\n"); return 1;}
-
-	
-	return 0;
-}
+int cp(int argc, char *argv[]){ NYI(); return 0;}

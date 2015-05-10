@@ -1,10 +1,10 @@
+/* pong.c */
+
 static void setup();
 static void reset();
 static void play();
 static void printPbuffer();
 static void drawboard(int ploc, int oloc, int x, int y);
-
-//char console_save[VGA_W*VGA_H*2];
 
 void pong(){ 
 	int saveoff = typeOffset;
@@ -134,8 +134,6 @@ static void play(){
 				else if(pxloc>=ploc+5 && pxloc<=ploc+7) dir = (dir+3)%6+1;
 			}else if(pyloc==0) dir = (dir+3)%6;
 
-			//if((pyloc==VGA_H-1 && (pxloc>=ploc && pxloc<=ploc+7)) || pyloc==0) dir = (dir+3)%6;
-			//else if(pyloc==VGA_H) pyloc=VGA_H/2;
 			oloc+=(oloc==pxloc-4)?0:(oloc<pxloc-4)?1:-1;
 			oloc=(oloc<20)?20:oloc;
 			oloc=(oloc>VGA_W-28)?VGA_W-28:oloc;

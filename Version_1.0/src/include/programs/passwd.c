@@ -1,3 +1,5 @@
+/* passwd.c */
+
 int passwd(int argc, char *argv[]){ 
 	if(argc>2){ 
 		printToConsole("Error: Wrong number of arguments!\n");

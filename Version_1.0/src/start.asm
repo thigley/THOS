@@ -1,6 +1,5 @@
-; kernel.asm
+; start.asm
 ; Based on Bran's kernel development tutorial file start.asm
-;
 
 MBOOT_PAGE_ALIGN    equ 1<<0    	; Load kernel and modules on a page boundary
 MBOOT_MEM_INFO      equ 1<<1    	; Provide your kernel with memory info
@@ -32,8 +31,8 @@ mboot:
 [EXTERN kmain]                  ; This is the entry point of our C code
 
 start:
-	push    ebx             ; Load multiboot header location
-	; Execute the kernel:
-	cli			;block interrupts
-	call kmain
-	jmp $
+  push    ebx             ; Load multiboot header location
+  ; Execute the kernel:
+  cli			;block interrupts
+  call kmain
+  jmp $

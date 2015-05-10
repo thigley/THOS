@@ -1,3 +1,5 @@
+/* key_queue.c */
+
 struct key_queue KQ;
 
 void add_key(unsigned char scan, char next)

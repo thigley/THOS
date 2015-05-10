@@ -1,3 +1,6 @@
+/* descriptor_tables.h 
+From JamesM's kernel development tutorials */
+
 struct gdt_entry_struct
 {
    u16int limit_low;           // The lower 16 bits of the limit.

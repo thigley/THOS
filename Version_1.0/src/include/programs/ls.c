@@ -1,3 +1,5 @@
+/* ls.c */
+
 static void lsfile(int filenum, int l, int numin);
 int ls(int argc, char *argv[]){ 
 	int l = 0;
@@ -7,10 +9,7 @@ int ls(int argc, char *argv[]){
 	for(i = 0; i < filesystem.nodes[filesystem.fs[dir].nodloc].size; i++){
 		lsfile(filesystem.nodes[filesystem.fs[dir].nodloc].directblocks[i], l, i);
 	} 
-	/*for(i = 0; i < NUM_OF_INODES; i++){
-		if(filesystem.fs[i].used==0) continue;
-		lsfile(i, l);
-	} */
+
 	if(!l) printCharToConsole('\n');
 
 	return 0;

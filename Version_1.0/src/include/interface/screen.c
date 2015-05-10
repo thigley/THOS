@@ -1,4 +1,5 @@
 /* screen.c */
+
 #include "../screen.h"
 
 char *vidptr = (char*) 0xb8000; //location of video memory

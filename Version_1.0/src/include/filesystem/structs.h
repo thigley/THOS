@@ -1,3 +1,5 @@
+/* structs.h */
+
 #include "stack.h"
 #define BLOCKSIZE 512
 #define NUM_OF_INODES 10

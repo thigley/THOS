@@ -1,0 +1,23 @@
+#define max 60
+
+typedef struct StackIs{
+	int top;
+	int elements[max];
+} StackI;
+
+void push(StackI *s, int add){
+	(*s).elements[(*s).top] = add;
+	(*s).top+=1;
+}
+
+int pop(StackI *s){
+	return (*s).elements[--(*s).top];
+}
+
+int peak(StackI *s){
+	return (*s).elements[(*s).top-1];
+}
+
+int isEmpty(StackI *s){
+	return (*s).top==0?1:0;
+}

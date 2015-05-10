@@ -1,3 +1,6 @@
+/* dir.c 
+cd, pwd, mv, mkdir and rmdir */
+
 int mkdir(int argc, char *argv[]){ 
 	if(argc!=2){ 
 		printToConsole("Error: Wrong number of arguments!\n");

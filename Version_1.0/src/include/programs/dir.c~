@@ -84,7 +84,7 @@ int mv(int argc, char *argv[]){
 		printToConsole("Error: No such file!\n");
 		return 1;
 	}
-	removefromfolder(int filenum)
-	addFileToDir(int filenum, int dirnum)
+	removefromfolder(filenum);
+	addFileToDir(filenum, dirnum);
 	return 0;
 }

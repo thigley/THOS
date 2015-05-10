@@ -1,4 +1,5 @@
-/* Misc.c */
+/* Misc.c 
+Includes all misc. files */
 
 // Includes
 #include "misc/messages.c"
