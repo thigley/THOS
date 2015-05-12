@@ -79,7 +79,7 @@ char *autoComp(char *sofar){
 
 void readCommand(){
 	clearBuffer();
-	int pos = 0, line=((typeOffset/2)/VGA_W); //%VGA_H;
+	int pos = 0, line=((typeOffset/2)/VGA_W);
 	clearLine();
 	updateCursor(typeOffset/2);
 	key next;

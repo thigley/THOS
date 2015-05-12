@@ -17,12 +17,15 @@ int cat(int argc, char *argv[]){
 	int db = 0;
 	int pos = 0;
 	
+	int nodenum = filesystem.fs[filenum].nodloc;
+	int blocknum;
+	
 	for(i=0; i<length; i++){
-		int nodenum = filesystem.fs[filenum].nodloc;
-		int blocknum = filesystem.nodes[nodenum].directblocks[db];
+		blocknum = filesystem.nodes[nodenum].directblocks[db];
 		printCharToConsole(filesystem.blocks[blocknum].data[pos++]);
 		if(pos==512) {pos=0;db++;}
 	}
+
  	printToConsole("\n");
 	return 0;
 }

@@ -144,7 +144,7 @@ void welcome(){
 
 void listCommands(){
 	textColor = LIGHTGRAY;
-	printToConsole("\tclear \t\t\t\t\t\t- clears the terminal screen\n");
+	printToConsole("\tclear \t\t\t\t\t- clears the terminal screen\n");
 	printToConsole("\tls \t\t\t\t\t\t- list all files\n");
 	printToConsole("\tcat [file] \t\t\t\t- view contents of that file\n");
 	printToConsole("\trm [file] \t\t\t\t- remove file with name\n");
