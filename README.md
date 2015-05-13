@@ -2,20 +2,24 @@ THOS
 =================
 **Tyler James Higley**
 
-This is a repository for Tyler Higley's 2015 Computer Science Senior Thesis Project. 
+This is a repository for Tyler Higley's 2015 Computer Science Senior Thesis Project. Version 1.0 has been complete as of May 5th 2015.
 
 ###Abstract
-The goal of this project is to write from scratch a simple minimally functional Operating System for the x86 architecture using C and Assembly Language. The design and implementation will take primary inspiration from Unix as well as similar minimal/educational Operating Systems projects such as Minix and Xinu. In the process I will attempt to educate myself in the field of Operating Systems and develop a closer understanding of what goes on in the layers between the hardware and user applications. If successful this project should not only be at least minimally usable for simple tasks, but also fill the role of an educational tool for others wishing to learn about Operating System concepts, design, and implementation.
+An operating system is the software that interfaces between users and the underlying hardware of the machine. It manages all of the computers resources and provides a platform on which other programs may operate. For my senior computer science thesis I wrote a simple minimally functional operating system for the x86 architecture using C and Assembly Language. The design and implementation, when possible, took primary inspiration from the Unix operating system. It has an inode based filesystem with a directory structure, interrupt driven user input, and command line interface. The OS in question, THOS, is integrated with the GRUB bootloader and is equipped with a builtin text editor.
 
-###Progress
-I am currently working on multiple modules that will eventually be put together into version 0.1. The intended release date for version 0.1 is March 5th however this may be pushed back.
+###Features
+Here are all the features built into THOS.
+- Commands (ls, cat, rm, wc, history, chmod, chown, su, adduser, deluser, listus, echo, passwd, pwd, cd, mkdir, rmdir, mv)
+- Text Editor (te)
+- Pong Game
+- Tab Autocomplete
+- Inode Filesystem with Directories
 
-###Sources:
-- Operating Systems Design and Implementation - Andrew S Tanenbaum
-- http://wiki.osdev.org
-- OS Development Series - brokenthorn.com
-- Writing a Simple Operating System — from Scratch by Nick Blundell
-- Write Your Own Operating System Tutorial - joelgompert.com
-- Writing a 16-bit Real mode OS [NASM] - appusajeev.wordpress.com
-- Onyxkernel -- First Steps -
-
+###Future Plans
+Here is a list of features that would be nice to include in the near future. 
+- Additional Commands (cp, diff, more, ff, grep, date, cal, kill, ps, chgrp, addgrp, rmgrp)
+- Text Editor Uograde
+- Scripting 
+- Improve Filesystems
+- Pipe standard output
+- Process Manager and System Calls
