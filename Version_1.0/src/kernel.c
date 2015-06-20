@@ -19,6 +19,6 @@ int kmain(/*struct multiboot *mboot_ptr*/)
 	initfs();
 
 	shell();
-	return 0xDEADBABA;
+	return 0xDEADBADA;
 }
 
